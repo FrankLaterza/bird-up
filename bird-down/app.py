@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Create upload folder if it doesn't exist
-UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bird-images')
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bird_images')
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

@@ -5,7 +5,7 @@ from pathlib import Path
 import math
 
 SEG_MODEL = 'models/yolov8s-seg.pt'
-CLS_MODEL = 'models/bestMed.pt'
+CLS_MODEL = 'models/bestSmall.pt'
 
 def run_segmentation(img_path, seg_model_path=SEG_MODEL):
     seg_model = YOLO(seg_model_path)
@@ -118,3 +118,5 @@ def process_image(img_path, img_name, seg_model_path=SEG_MODEL, cls_model_path=C
     quality_score = image_rating(best_score, image.shape[1], image.shape[0], x, y, w, h)
 
     return results, quality_score
+
+process_image("./input/mall.jpg", "mall")
