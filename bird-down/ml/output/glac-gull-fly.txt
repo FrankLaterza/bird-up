@@ -1,0 +1,14 @@
+
+image 1/1 C:\Users\mmamd\OneDrive\Documents\GitHub\bird-up\bird-down\ml\input\glac-gull-fly.jpg: 448x640 1 bird, 440.5ms
+Speed: 11.8ms preprocess, 440.5ms inference, 13.8ms postprocess per image at shape (1, 3, 448, 640)
+
+0: 320x320 065.Slaty_backed_Gull 0.86, 062.Herring_Gull 0.04, 064.Ring_billed_Gull 0.04, 045.Northern_Fulmar 0.03, 060.Glaucous_winged_Gull 0.02, 136.3ms
+Speed: 20.8ms preprocess, 136.3ms inference, 0.1ms postprocess per image at shape (1, 3, 320, 320)
+Classification Top 5:
+1. 065.Slaty_backed_Gull: 86.05%
+2. 062.Herring_Gull: 4.40%
+3. 064.Ring_billed_Gull: 3.91%
+4. 045.Northern_Fulmar: 3.22%
+5. 060.Glaucous_winged_Gull: 1.75%
+Bounding Box Info:
+Location: x=83, y=129, width=675, height=400
