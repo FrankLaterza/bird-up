@@ -1,0 +1,14 @@
+
+image 1/1 C:\Users\mmamd\OneDrive\Documents\GitHub\bird-up\bird-down\ml\input\ew.jpg: 640x480 11 birds, 1 banana, 306.4ms
+Speed: 4.5ms preprocess, 306.4ms inference, 36.4ms postprocess per image at shape (1, 3, 640, 480)
+
+0: 320x320 108.White_necked_Raven 0.43, 008.Rhinoceros_Auklet 0.24, 105.Whip_poor_Will 0.13, 024.Red_faced_Cormorant 0.03, 005.Crested_Auklet 0.03, 105.9ms
+Speed: 5.3ms preprocess, 105.9ms inference, 0.0ms postprocess per image at shape (1, 3, 320, 320)
+Classification Top 5:
+1. 108.White_necked_Raven: 42.58%
+2. 008.Rhinoceros_Auklet: 23.50%
+3. 105.Whip_poor_Will: 12.63%
+4. 024.Red_faced_Cormorant: 3.21%
+5. 005.Crested_Auklet: 2.66%
+Bounding Box Info:
+Location: x=567, y=1449, width=378, height=322

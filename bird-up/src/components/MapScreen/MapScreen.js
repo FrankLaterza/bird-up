@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import { Map, View } from "ol";
-import TileLayer from "ol/layer/Tile";
+import Map from "ol/Map";
+import View from "ol/View";
+import { Tile as TileLayer } from "ol/layer";
 import OSM from "ol/source/OSM";
 import './MapScreen.css';
 import "ol/ol.css";
