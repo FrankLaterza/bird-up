@@ -1,4 +1,4 @@
-#!/Users/wormy/GitHub/bird-up/backend/bird-up/bin/python3.12
+#!/Users/wormy/GitHub/bird-up/bird-down/virtual-bird/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys
