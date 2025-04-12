@@ -1,0 +1,14 @@
+
+image 1/1 C:\Users\mmamd\OneDrive\Documents\GitHub\bird-up\bird-down\ml\input\cactus.jpg: 640x544 1 bird, 358.9ms
+Speed: 4.5ms preprocess, 358.9ms inference, 4.1ms postprocess per image at shape (1, 3, 640, 544)
+
+0: 320x320 194.Cactus_Wren 0.70, 150.Sage_Thrasher 0.26, 036.Northern_Flicker 0.02, 088.Western_Meadowlark 0.01, 149.Brown_Thrasher 0.00, 98.6ms
+Speed: 4.7ms preprocess, 98.6ms inference, 0.0ms postprocess per image at shape (1, 3, 320, 320)
+Classification Top 5:
+1. 194.Cactus_Wren: 70.39%
+2. 150.Sage_Thrasher: 26.14%
+3. 036.Northern_Flicker: 1.68%
+4. 088.Western_Meadowlark: 0.83%
+5. 149.Brown_Thrasher: 0.34%
+Bounding Box Info:
+Location: x=319, y=566, width=948, height=1196

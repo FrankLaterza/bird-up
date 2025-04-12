@@ -4,8 +4,9 @@ from ultralytics import YOLO
 from pathlib import Path
 
 SEG_MODEL = 'models/yolov8s-seg.pt'          
-CLS_MODEL = 'best.pt' 
-IMG_PATH = 'input/mall-copy.jpg'
+CLS_MODEL = 'models/bestMed.pt' 
+IMG_NAME = 'ew'
+IMG_PATH = f'input/{IMG_NAME}.jpg'
 
 def run_segmentation(img_path):
     seg_model = YOLO(SEG_MODEL)
@@ -56,10 +57,10 @@ def main():
     outline_img = image.copy()
     cv2.drawContours(outline_img, [outline], -1, (0, 255, 0), 2)
     cv2.rectangle(outline_img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-    cv2.imwrite("results/outlined.jpg", outline_img)
+    cv2.imwrite(f'output/{IMG_NAME}_outlined.jpg', outline_img)
 
     cropped_img = crop_image(image, x, y, w, h)
-    cv2.imwrite("results/output.jpg", cropped_img)
+    cv2.imwrite(f'output/{IMG_NAME}_output.jpg', cropped_img)
 
     resized = cv2.resize(cropped_img, (224, 224)) 
     results = run_classification(resized)
