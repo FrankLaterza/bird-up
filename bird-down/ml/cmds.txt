@@ -1,0 +1,7 @@
+Command to train, evaluate, and run models from CMD
+
+Train - yolo task=classify mode=train model=yolov8{n, s, m, l, x SET THE MODEL SIZE}-cls.pt data=birds_yolo_classification epochs=100 imgsz=224
+
+Eval - yolo task=classify mode=val model=best.pt data=birds_yolo_classification
+
+Test - yolo task=classify mode=predict model=best.pt source={"" of your image path}
