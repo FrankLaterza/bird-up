@@ -5,7 +5,7 @@ from pathlib import Path
 
 SEG_MODEL = 'models/yolov8s-seg.pt'          
 CLS_MODEL = 'models/bestMed.pt' 
-IMG_NAME = 'ew'
+IMG_NAME = 'glac-gull-still'
 IMG_PATH = f'input/{IMG_NAME}.jpg'
 
 def run_segmentation(img_path):
