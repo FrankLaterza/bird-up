@@ -3,9 +3,9 @@ import numpy as np
 from ultralytics import YOLO
 from pathlib import Path
 
-SEG_MODEL = 'yolov8s-seg.pt'          
+SEG_MODEL = 'models/yolov8s-seg.pt'          
 CLS_MODEL = 'best.pt' 
-IMG_PATH = 'cactus.jpg'
+IMG_PATH = 'input/mall-copy.jpg'
 
 def run_segmentation(img_path):
     seg_model = YOLO(SEG_MODEL)
@@ -56,10 +56,10 @@ def main():
     outline_img = image.copy()
     cv2.drawContours(outline_img, [outline], -1, (0, 255, 0), 2)
     cv2.rectangle(outline_img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-    cv2.imwrite("outlined.jpg", outline_img)
+    cv2.imwrite("results/outlined.jpg", outline_img)
 
     cropped_img = crop_image(image, x, y, w, h)
-    cv2.imwrite("cropped.jpg", cropped_img)
+    cv2.imwrite("results/output.jpg", cropped_img)
 
     resized = cv2.resize(cropped_img, (224, 224)) 
     results = run_classification(resized)
@@ -70,7 +70,6 @@ def main():
 
     print("Bounding Box Info:")
     print(f"Location: x={x}, y={y}, width={w}, height={h}")
-    print(f"Outline Area: {cv2.contourArea(outline):.2f}")
 
 if __name__ == "__main__":
     main()
