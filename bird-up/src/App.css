@@ -1,5 +1,5 @@
-:root{
- --cameraButtonSize: 80px;
+:root {
+  --cameraButtonSize: 80px;
 }
 
 .App {
@@ -14,53 +14,61 @@
   }
 }
 
-#uiOverlay{
-  width:100vw;
-  height:100vh;
-  position:absolute;
+#uiOverlay {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
   z-index: 8;
-  margin:0px;
-  top:0px;
+  margin: 0px;
+  top: 0px;
   pointer-events: none;
 }
 
-#crosshairs{
-  position:absolute;
+#crosshairs {
+  position: absolute;
   z-index: 10;
-  font-size:5em;
+  font-size: 5em;
   align-self: center;
-  margin:0px;
-  left:0;
+  margin: 0px;
+  left: 0;
   right: 0;
-  top:0;
+  top: 0;
   bottom: 0;
   font-weight: 100;
 }
 
-.bottomCenterButton{
-  position:absolute;
-  left:0;
-  right:0;
-  width:var(--cameraButtonSize);
+.bottomButton {
+  position: absolute;
+  width: var(--cameraButtonSize);
   height: var(--cameraButtonSize);
-  border-radius:100%;
+  border-radius: 100%;
   background-color: #fff;
   z-index: 9;
-  bottom:10px;
-  margin:auto;
+  bottom: 10px;
+  margin: auto;
   pointer-events: all;
 }
 
-.right{
-  left:auto;
-  right:20px;
+.centeredButton {
+  left: 0;
+  right: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.right {
+  left: auto;
+  right: 20px;
+}
+
+.expandIcon{
+  display: none;
+}
+
+#openDex {
+  right: 20px;
+  bottom: 120px;
+}
+
+#openGallery {
+  right: 140px;
+  /* bottom:  0px; */
 }

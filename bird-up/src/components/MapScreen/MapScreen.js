@@ -4,6 +4,11 @@ import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import './MapScreen.css';
 import "ol/ol.css";
+import { useGeographic, transform } from 'ol/proj.js';
+import { Point } from "ol/geom";
+
+const start = [-76.939, 38.9861];
+const center = transform(start, 'EPSG:4326', 'EPSG:3857');
 
 function MapScreen() {
   const mapRef = useRef()
@@ -18,8 +23,8 @@ function MapScreen() {
       target: mapRef.current,
       layers: [osmLayer],
       view: new View({
-        center: [0, 0],
-        zoom: 0,
+        center: center,
+        zoom: 20,
       }),
     })
     return () => map.setTarget(null)
