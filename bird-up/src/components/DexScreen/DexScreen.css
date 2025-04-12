@@ -1,0 +1,27 @@
+:root{
+    --dexEntrySize: 150px;
+}
+
+.DexScreen {
+    background-color: red !important
+}
+
+#dexHolder {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    height:100vh;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.dexItem {
+    width: var(--dexEntrySize);
+    height: var(--dexEntrySize);
+    background-color: rgb(255, 0, 119);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
