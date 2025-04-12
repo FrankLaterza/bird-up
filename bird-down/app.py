@@ -3,27 +3,35 @@ import requests
 import os
 import re
 from dotenv import load_dotenv
+import uuid
+from werkzeug.utils import secure_filename
+from flask_cors import CORS
 
 load_dotenv()
 
 app = Flask(__name__)
+# Enable CORS for all routes
+CORS(app)
+
+# Create upload folder if it doesn't exist
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bird-images')
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload size
+
+# Allowed image file extensions
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
     return jsonify({'status': 'ok', 'message': 'Flask server is running'})
 
 def clean_bird_data(bird_data):
-    """
-    Clean the bird sighting data by:
-    1. Keeping only comName, lat, lng, and obsDt fields
-    2. Cleaning comName to match the naming convention (removing apostrophes, separating words by underscores)
-    
-    Args:
-        bird_data (list): List of bird sighting data from eBird API
-        
-    Returns:
-        list: Cleaned bird sighting data
-    """
+
     cleaned_data = []
     
     for bird in bird_data:
@@ -90,6 +98,33 @@ def get_bird_sightings():
     
     except Exception as e:
         return jsonify({'error': 'Server error', 'message': str(e)}), 500
+
+# POST /api/upload-image HTTP/1.1
+@app.route('/api/upload-image', methods=['POST'])
+def upload_image():
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image part in the request'}), 400
+    
+    file = request.files['image']
+    
+    if file.filename == '':
+        return jsonify({'error': 'No image selected'}), 400
+    
+    if file and allowed_file(file.filename):
+        # generate unique filename
+        filename = secure_filename(file.filename)
+        unique_filename = f"{uuid.uuid4()}_{filename}"
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
+        file.save(file_path)
+        
+        return jsonify({
+            'success': True,
+            'message': 'Image uploaded successfully',
+            'filename': unique_filename,
+            'path': file_path
+        })
+    
+    return jsonify({'error': 'File type not allowed'}), 400
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
