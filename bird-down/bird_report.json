@@ -1,0 +1,45 @@
+{
+    "username": "DEFAULT_USER",
+    "birds": {
+        "137.cliff_swallow": [
+            {
+                "uri": "bird_images/c114ee06-4dad-40c6-847d-490e41374b38.jpg",
+                "rating": 24.96,
+                "description": "this is a description"
+            }
+        ],
+        "106.horned_puffin": [
+            {
+                "uri": "bird_images/9c8f8d75-76d6-4885-9f0e-c885a7689006.jpg",
+                "rating": 19.82,
+                "description": "this is a description"
+            }
+        ],
+        "138.tree_swallow": [
+            {
+                "uri": "bird_images/bc0b7fcf-55b6-48a7-8828-4c734c775003.jpg",
+                "rating": 20.02,
+                "description": "this is a description"
+            }
+        ],
+        "017.cardinal": [
+            {
+                "uri": "bird_images/e7ec2c6b-52d3-4da7-acbd-2336712c34c8.jpg",
+                "rating": 37.29,
+                "description": "this is a description"
+            },
+            {
+                "uri": "bird_images/d3f1cd86-89b4-49c0-97f1-4e91ee59173e.jpg",
+                "rating": 77.81,
+                "description": "this is a description"
+            }
+        ],
+        "008.rhinoceros_auklet": [
+            {
+                "uri": "bird_images/5d40ab80-ff81-4068-8058-2d50549cd4ab.jpg",
+                "rating": 35.82,
+                "description": "this is a description"
+            }
+        ]
+    }
+}

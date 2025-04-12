@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 import uuid
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
+from birds import BirdSightingManager
+from ml.image_processing import process_image
 
 load_dotenv()
 
@@ -117,6 +119,22 @@ def upload_image():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
         file.save(file_path)
         
+        results, quality_score = process_image(file_path, "input");
+
+        
+        best_bird, best_prob = results[0]
+
+        print(best_bird, best_prob, file_path, quality_score)
+
+
+        # save to db
+        bird_db = BirdSightingManager()
+        bird_db.add_sighting('DEFAULT_USER', best_bird, file_path, quality_score, "this is a description")
+
+        # print for debug
+        output_json_file = f"bird_report.json"
+        bird_db.export_user_sightings_to_json('DEFAULT_USER', output_json_file)
+
         return jsonify({
             'success': True,
             'message': 'Image uploaded successfully',

@@ -4,8 +4,8 @@ from ultralytics import YOLO
 from pathlib import Path
 import math
 
-SEG_MODEL = 'models/yolov8s-seg.pt'
-CLS_MODEL = 'models/bestSmall.pt'
+SEG_MODEL = 'ml/models/yolov8s-seg.pt'
+CLS_MODEL = 'ml/models/bestSmall.pt'
 
 def run_segmentation(img_path, seg_model_path=SEG_MODEL):
     seg_model = YOLO(seg_model_path)
@@ -89,7 +89,7 @@ def image_rating(certainty_score, og_img_w, og_img_h, box_x, box_y, box_w, box_h
     return quality_rating
 
 # HIT THIS ROUTE TO DO THINGS YAY
-def process_image(img_path, img_name, seg_model_path=SEG_MODEL, cls_model_path=CLS_MODEL, save_dir='output'):
+def process_image(img_path, img_name, seg_model_path=SEG_MODEL, cls_model_path=CLS_MODEL, save_dir='ml/output'):
     image_path = Path(img_path)
     image = cv2.imread(str(image_path))
 
@@ -119,4 +119,4 @@ def process_image(img_path, img_name, seg_model_path=SEG_MODEL, cls_model_path=C
 
     return results, quality_score
 
-process_image("./input/mall.jpg", "mall")
+# bbprocess_image("./input/mall.jpg", "mall")
