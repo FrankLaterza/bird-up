@@ -110,7 +110,7 @@ def upload_image():
     if file.filename == '':
         return jsonify({'error': 'No image selected'}), 400
 
-
+    if allowed_file(file.filename):
         # generate unique filename
         filename = secure_filename(file.filename)
         unique_filename = f"{uuid.uuid4()}_{filename}"
