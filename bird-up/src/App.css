@@ -1,0 +1,66 @@
+:root{
+ --cameraButtonSize: 80px;
+}
+
+.App {
+  text-align: center;
+  position: relative;
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+#uiOverlay{
+  width:100vw;
+  height:100vh;
+  position:absolute;
+  z-index: 8;
+  margin:0px;
+  top:0px;
+  pointer-events: none;
+}
+
+#crosshairs{
+  position:absolute;
+  z-index: 10;
+  font-size:5em;
+  align-self: center;
+  margin:0px;
+  left:0;
+  right: 0;
+  top:0;
+  bottom: 0;
+  font-weight: 100;
+}
+
+.bottomCenterButton{
+  position:absolute;
+  left:0;
+  right:0;
+  width:var(--cameraButtonSize);
+  height: var(--cameraButtonSize);
+  border-radius:100%;
+  background-color: #fff;
+  z-index: 9;
+  bottom:10px;
+  margin:auto;
+  pointer-events: all;
+}
+
+.right{
+  left:auto;
+  right:20px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

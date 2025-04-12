@@ -1,0 +1,12 @@
+.MapScreen {
+    background-color: magenta !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    color: black !important;
+}
+
+#map {
+    width: 100vw;
+    height: 100vh;
+    /* background-color: greenyellow !important; */
+}

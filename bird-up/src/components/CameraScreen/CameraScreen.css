@@ -1,0 +1,19 @@
+.CameraScreen {
+    background-color: yellowgreen !important;
+    color:black !important;
+}
+
+.cameraBox{
+    height:100vh;
+    overflow: hidden;
+}
+
+.definitelyHide{
+    display:none !important;
+}
+
+.photo{
+    height:100vh;
+    overflow: hidden !important;
+    object-fit:contain;
+}

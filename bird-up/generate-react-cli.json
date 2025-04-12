@@ -1,0 +1,16 @@
+{
+  "usesTypeScript": false,
+  "usesStyledComponents": false,
+  "testLibrary": "None",
+  "component": {
+    "default": {
+      "path": "C:\\Users\\charl\\proj\\Bird Up\\bird-up\\components",
+      "withStyle": true,
+      "withTest": false,
+      "withStory": false,
+      "withLazy": false
+    }
+  },
+  "usesCssModule": true,
+  "cssPreprocessor": "css"
+}
