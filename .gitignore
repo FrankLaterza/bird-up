@@ -1,3 +1,7 @@
 .env
+<<<<<<< HEAD
 __pycache__
 /bird-down/bird-images/*
+=======
+node_modules
+>>>>>>> Frontend-2

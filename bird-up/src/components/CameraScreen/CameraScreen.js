@@ -26,7 +26,7 @@ function CameraScreen() {
     const constraints = {
       audio: false,
       video: {
-        facingMode: 'user'
+        facingMode: 'environment',
       }
     }
   
