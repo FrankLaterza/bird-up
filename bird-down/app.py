@@ -1,9 +1,9 @@
 from flask import Flask, jsonify, request
 import requests
 import os
+import re
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
@@ -12,8 +12,44 @@ app = Flask(__name__)
 def health_check():
     return jsonify({'status': 'ok', 'message': 'Flask server is running'})
 
-@app.route('/api/birds', methods=['GET'])
-def get_birds():
+def clean_bird_data(bird_data):
+    """
+    Clean the bird sighting data by:
+    1. Keeping only comName, lat, lng, and obsDt fields
+    2. Cleaning comName to match the naming convention (removing apostrophes, separating words by underscores)
+    
+    Args:
+        bird_data (list): List of bird sighting data from eBird API
+        
+    Returns:
+        list: Cleaned bird sighting data
+    """
+    cleaned_data = []
+    
+    for bird in bird_data:
+        # Extract only the required fields
+        cleaned_bird = {
+            'comName': bird.get('comName'),
+            'lat': bird.get('lat'),
+            'lng': bird.get('lng'),
+            'obsDt': bird.get('obsDt')
+        }
+        
+        # Clean the comName to match the naming convention
+        if cleaned_bird['comName']:
+            # Remove apostrophes and 's' after apostrophes
+            name = re.sub(r"'s\b", '', cleaned_bird['comName'])
+            # Replace spaces and hyphens with underscores
+            name = re.sub(r'[ -]+', '_', name)
+            cleaned_bird['comName'] = name
+        
+        cleaned_data.append(cleaned_bird)
+    
+    return cleaned_data
+
+# GET /api/get-bird-sightings?lat=37.7749&lng=-122.4194 HTTP/1.1    
+@app.route('/api/get-bird-sightings', methods=['GET'])
+def get_bird_sightings():
     # Get latitude and longitude from query parameters
     lat = request.args.get('lat')
     lng = request.args.get('lng')
@@ -42,7 +78,10 @@ def get_birds():
         
         # Check if request was successful
         if response.status_code == 200:
-            return jsonify(response.json())
+            # Clean the bird data before returning
+            bird_data = response.json()
+            cleaned_data = clean_bird_data(bird_data)
+            return jsonify(cleaned_data)
         else:
             return jsonify({
                 'error': f'eBird API request failed with status code {response.status_code}',
