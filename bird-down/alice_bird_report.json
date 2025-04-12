@@ -1,0 +1,24 @@
+{
+    "username": "Alice",
+    "birds": {
+        "blue jay": [
+            {
+                "uri": "bird_images/22745339-ba14-47f3-95cc-a9eaa5fb77ef.jpg",
+                "rating": 4,
+                "description": "Vibrant blue, very active."
+            },
+            {
+                "uri": "bird_images/a911764e-ffa4-46d4-ab94-ae2331676bb9.jpg",
+                "rating": 5,
+                "description": "Another sighting, closer this time."
+            }
+        ],
+        "crow": [
+            {
+                "uri": "bird_images/6dc106d4-ce16-483e-af1a-b5a9e2815f2d.jpg",
+                "rating": 3,
+                "description": "Standard crow, watching from a distance."
+            }
+        ]
+    }
+}

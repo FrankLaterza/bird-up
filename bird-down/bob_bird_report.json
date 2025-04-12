@@ -1,0 +1,12 @@
+{
+    "username": "Bob",
+    "birds": {
+        "robin": [
+            {
+                "uri": "bird_images/9290644b-9655-4a61-a01b-d01eda4732be.png",
+                "rating": 5,
+                "description": "Classic red breast, pulling a worm!"
+            }
+        ]
+    }
+}
