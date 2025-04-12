@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import Map from 'ol/Map.js';
+import Map from 'ol/Map';
 
 import MapScreen from './components/MapScreen/MapScreen';
 import DexScreen from './components/DexScreen/DexScreen';
