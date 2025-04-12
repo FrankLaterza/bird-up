@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import Map from 'ol/Map.js';
+import Map from 'ol/Map';
 
 import MapScreen from './components/MapScreen/MapScreen';
 import DexScreen from './components/DexScreen/DexScreen';
@@ -24,13 +24,23 @@ function App() {
     let mapIcons = Array.from(document.getElementsByClassName("mapIcon"));
     console.log(mapIcons);
     console.log(screen);
-    screen != MAP_SCREEN ? mapIcons.map((mapIcon) => mapIcon.style.display = "none") : mapIcons.map((mapIcon) => mapIcon.style.display = "block");
+    if (screen != MAP_SCREEN) {
+      mapIcons.map((mapIcon) => mapIcon.style.display = "none");
+      expandMenu(true);
+    }
+    else {
+      mapIcons.map((mapIcon) => mapIcon.style.display = "block");
+    }
+
   }
 
   const toggleMenu = () => {
     expandMenu(!menuExpanded);
     let expandIcons = Array.from(document.getElementsByClassName("expandIcon"));
     expandIcons.map((expandIcon) => { expandIcon.style.display = menuExpanded ? "none" : "block" });
+  }
+  const setMenu = (shown) => {
+    expandMenu(shown);
   }
 
   const CurrentScreen = screens[currentScreen]; // Select the current screen component

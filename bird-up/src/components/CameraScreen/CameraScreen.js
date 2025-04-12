@@ -6,38 +6,38 @@ import { useRef } from 'react';
 import './CameraScreen.css';
 
 function CameraScreen() {
+  // Add state for handling video elements
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+  const stripRef = useRef(null);
+  const [ctx, setCtx] = useState(null);
 
-  function runVideo(){
-    const video = document.querySelector('.player');
-    const canvas = document.querySelector('.photo');
+  function runVideo() {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    const strip = document.querySelector('.strip');
-    const snap = document.querySelector('.snap');
-    // const count = 0;
-    console.log(video);
-  
+    setCtx(ctx);
+    const strip = stripRef.current;
+    
     video.setAttribute('autoplay', '');
     video.setAttribute('muted', '');
-    video.setAttribute('playsinline', '')
+    video.setAttribute('playsinline', '');
   
     const constraints = {
       audio: false,
       video: {
-        facingMode: 'user'
+        facingMode: 'environment',
       }
     }
   
     function getVideo() {
       navigator.mediaDevices.getUserMedia(constraints)
         .then(localMediaStream => {
-          console.log(localMediaStream);
-          console.dir(video);
           if ('srcObject' in video) {
             video.srcObject = localMediaStream;
           } else {
             video.src = URL.createObjectURL(localMediaStream);
           }
-          // video.src = window.URL.createObjectURL(localMediaStream);
           video.play();
         })
         .catch(err => {
@@ -53,60 +53,61 @@ function CameraScreen() {
   
       return setInterval(() => {
         ctx.drawImage(video, 0, 0, width, height);
-        // take the pixels out
-        // let pixels = ctx.getImageData(0, 0, width, height);
-        // mess with them
-        // pixels = redEffect(pixels);
-  
-        // pixels = rgbSplit(pixels);
-        // ctx.globalAlpha = 0.8;
-  
-        // pixels = greenScreen(pixels);
-        // put them back
-        // ctx.putImageData(pixels, 0, 0);
       }, 16);
     }
-  
-    function takePhoto() {
-      // played the sound
-      snap.currentTime = 0;
-      snap.play();
-  
-      // take the data out of the canvas
-      const data = canvas.toDataURL('image/jpeg');
-      const link = document.createElement('a');
-      link.href = data;
-      link.setAttribute('download', 'handsome');
-      link.innerHTML = `<img src="${data}" alt="Handsome Man" />`;
-      strip.insertBefore(link, strip.firstChild);
-    }
-  
-    // function redEffect(pixels) {
-    //   for (let i = 0; i < pixels.data.length; i += 4) {
-    //     pixels.data[i + 0] = pixels.data[i + 0] + 200; // RED
-    //     pixels.data[i + 1] = pixels.data[i + 1] - 50; // GREEN
-    //     pixels.data[i + 2] = pixels.data[i + 2] * 0.5; // Blue
-    //   }
-    //   return pixels;
-    // }
-  
-    // function rgbSplit(pixels) {
-    //   for (let i = 0; i < pixels.data.length; i += 4) {
-    //     pixels.data[i - 150] = pixels.data[i + 0]; // RED
-    //     pixels.data[i + 500] = pixels.data[i + 1]; // GREEN
-    //     pixels.data[i - 550] = pixels.data[i + 2]; // Blue
-    //   }
-    //   return pixels;
-    // }
-  
   
     getVideo();
   
     video.addEventListener('canplay', paintToCanvas);
+  }
+
+  // Move takePhoto and uploadImageToServer out of runVideo to make them accessible to button
+  function takePhoto() {
+    const canvas = canvasRef.current;
+    const strip = stripRef.current;
+    
+    try {
+      // take the data out of the canvas
+      const data = canvas.toDataURL('image/jpeg');
+      
+      // Display the captured image in the strip
+      const link = document.createElement('a');
+      link.href = data;
+      link.setAttribute('download', 'bird_photo');
+      link.innerHTML = `<img src="${data}" alt="Captured Photo" />`;
+      strip.insertBefore(link, strip.firstChild);
+      
+      // Upload the image to our API endpoint
+      uploadImageToServer(data);
+    } catch (error) {
+      console.error('Error taking photo:', error);
+    }
+  }
   
-    console.log("YAHOOOOOOO");
-  
-  
+  function uploadImageToServer(dataUrl) {
+    // Convert the base64 data URL to a blob
+    const fetchBlob = fetch(dataUrl).then(res => res.blob());
+    
+    fetchBlob.then(blob => {
+      // Create a FormData object to send the image
+      const formData = new FormData();
+      formData.append('image', blob, 'image.jpg');
+      
+      // Send the image to our API endpoint
+      fetch('http://localhost:5001/api/upload-image', {
+        method: 'POST',
+        body: formData,
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Image uploaded successfully:', data);
+        // Here you can handle success, maybe show a confirmation message
+      })
+      .catch(error => {
+        console.error('Error uploading image:', error);
+        // Handle the error appropriately
+      });
+    });
   }
 
   const count = useRef(null);
@@ -117,45 +118,25 @@ function CameraScreen() {
     return () => { count.current = 1; }
   }, []);
 
-
-
+  useEffect(() => {
+    if (videoRef.current && canvasRef.current && stripRef.current) {
+      console.log('All refs are loaded');
+    }
+  }, [videoRef.current, canvasRef.current, stripRef.current]);
 
   return (
-    <div id="cameraBox" class="screen">
+    <div id="cameraBox" className="screen">
       <div className="photobooth">
         <div className="controls">
-          <button onClick={console.log("SHYTE")}>Take Photo</button>
-          {/* <!--       <div className="rgb">
-            <label for="rmin">Red Min:</label>
-            <input type="range" min=0 max=255 name="rmin">
-            <label for="rmax">Red Max:</label>
-            <input type="range" min=0 max=255 name="rmax">
-            <br>
-              <label for="gmin">Green Min:</label>
-              <input type="range" min=0 max=255 name="gmin">
-              <label for="gmax">Green Max:</label>
-              <input type="range" min=0 max=255 name="gmax">
-              <br>
-                <label for="bmin">Blue Min:</label>
-                <input type="range" min=0 max=255 name="bmin">
-                 <label for="bmax">Blue Max:</label>
-                <input type="range" min=0 max=255 name="bmax">
-              </div> --> */}
+          <button onClick={takePhoto}>Take Photo</button>
         </div>
 
-        <canvas className="photo"></canvas>
-        <video className="player definitelyHide"></video>
-        <div className="strip"></div>
+        <canvas className="photo" ref={canvasRef}></canvas>
+        <video className="player definitelyHide" ref={videoRef}></video>
+        <div className="strip" ref={stripRef}></div>
       </div>
-
-      <audio className="snap" src="./snap.mp3" hidden></audio>
-      <script src='vidya.js'></script>
     </div>
   );
 }
-
-// MapScreen.propTypes = { };
-
-// MapScreen.defaultProps = { };
 
 export default CameraScreen;
