@@ -1,0 +1,14 @@
+
+image 1/1 C:\Users\mmamd\OneDrive\Documents\GitHub\bird-up\bird-down\ml\input\mall.jpg: 480x640 1 bird, 349.4ms
+Speed: 4.6ms preprocess, 349.4ms inference, 4.2ms postprocess per image at shape (1, 3, 480, 640)
+
+0: 320x320 008.Rhinoceros_Auklet 0.83, 005.Crested_Auklet 0.05, 065.Slaty_backed_Gull 0.03, 007.Parakeet_Auklet 0.03, 024.Red_faced_Cormorant 0.01, 115.4ms
+Speed: 6.3ms preprocess, 115.4ms inference, 0.1ms postprocess per image at shape (1, 3, 320, 320)
+Classification Top 5:
+1. 008.Rhinoceros_Auklet: 82.71%
+2. 005.Crested_Auklet: 5.20%
+3. 065.Slaty_backed_Gull: 2.55%
+4. 007.Parakeet_Auklet: 2.52%
+5. 024.Red_faced_Cormorant: 1.43%
+Bounding Box Info:
+Location: x=58, y=19, width=170, height=146
