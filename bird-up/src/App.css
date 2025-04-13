@@ -227,3 +227,8 @@ button:hover {
 .definitelyHidden {
   opacity: 0.01 !important;
 }
+
+button svg{
+  stroke:#222 !important;
+  fill:#222 !important;
+}
