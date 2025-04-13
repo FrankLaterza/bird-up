@@ -72,7 +72,9 @@ const ImageDetailCard = ({ image, onClose }) => {
             
             <div className="detail-description">
               <span className="info-label">Description:</span>
-              <p>{image.description}</p>
+              <div className="description-scroll">
+                <p>{image.description}</p>
+              </div>
             </div>
           </div>
         </div>

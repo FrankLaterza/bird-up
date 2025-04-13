@@ -293,6 +293,24 @@
               opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+
+.description-scroll {
+  max-height: 290px;
+  overflow-y: auto;
+  padding-right: 3px;
+  text-align: left;
+}
+
+.description-scroll::-webkit-scrollbar {
+  width: 1px;
+}
+
+.description-scroll::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 3px;
+}
+
+
 .detail-card {
   width: 90%;
   height: 90%;
