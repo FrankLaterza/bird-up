@@ -2,1271 +2,269 @@ import PropTypes from 'prop-types';
 import './DexScreen.css';
 import { useState, useEffect } from "react";
 
-const items = [
-  {
-    name: "Acadian Flycatcher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "American Crow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "American Goldfinch",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "American Pipit",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "American Redstart",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "American Three-toed Woodpecker",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Anna Hummingbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Artic Tern",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Baird Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Baltimore Oriole",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Bank Swallow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Barn Swallow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Bay-breasted Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Belted Kingfisher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Bewick Wren",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Black Tern",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Black-and-white Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Black-billed Cuckoo",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Black-capped Vireo",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Black-footed Albatross",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Black-throated Blue Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Black-throated Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Blue Grosbeak",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Blue Jay",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Blue-headed Vireo",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Blue-winged Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Boat-tailed Grackle",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Bobolink",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Bohemian Waxwing",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Brandt Cormorant",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Brewer Blackbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Brewer Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Bronzed Cowbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Brown Creeper",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Brown Pelican",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Brown Thrasher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Cactus Wren",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "California Gull",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Canada Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Cape Glossy Starling",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Cape May Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Cardinal",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Carolina Wren",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Caspian Tern",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Cedar Waxwing",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Cerulean Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Chestnut-sided Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Chipping Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Chuck-will Widow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Clark Nutcracker",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Clay-colored Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Cliff Swallow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Common Raven",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Common Tern",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Common Yellowthroat",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Crested Auklet",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Dark-eyed Junco",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Downy Woodpecker",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Eared Grebe",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Eastern Towhee",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Elegant Tern",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "European Goldfinch",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Evening Grosbeak",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Field Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Fish Crow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Florida Jay",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Forsters Tern",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Fox Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Frigatebird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Gadwall",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Geococcyx",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Glaucous-winged Gull",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Golden-winged Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Grasshopper Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Gray Catbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Gray Kingbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Gray-crowned Rosy Finch",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Great Crested Flycatcher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Great Grey Shrike",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Green Jay",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Green Kingfisher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Green Violetear",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Green-tailed Towhee",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Groove-billed Ani",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Harris Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Heermann Gull",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Henslow Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Herring Gull",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Hooded Merganser",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Hooded Oriole",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Hooded Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Horned Grebe",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Horned Lark",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Horned Puffin",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "House Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "House Wren",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Indigo Bunting",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Ivory Gull",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Kentucky Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Laysan Albatross",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Lazuli Bunting",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Le Conte Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Least Auklet",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Least Flycatcher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Least Tern",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Lincoln Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Loggerhead Shrike",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Long-tailed Jaeger",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Louisiana Waterthrush",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Magnolia Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Mallard",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Mangrove Cuckoo",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Marsh Wren",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Mockingbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Mourning Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Myrtle Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Nashville Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Nelson Sharp-tailed Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Nighthawk",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Northern Flicker",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Northern Fulmar",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Northern Waterthrush",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Olive-sided Flycatcher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Orange-crowned Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Orchard Oriole",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Ovenbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Pacific Loon",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Painted Bunting",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Palm Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Parakeet Auklet",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Pelagic Cormorant",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Philadelphia Vireo",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Pied Kingfisher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Pied-billed Grebe",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Pigeon Guillemot",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Pileated Woodpecker",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Pine Grosbeak",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Pine Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Pomarine Jaeger",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Prairie Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Prothonotary Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Purple Finch",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Red-bellied Woodpecker",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Red-breasted Merganser",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Red-cockaded Woodpecker",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Red-eyed Vireo",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Red-faced Cormorant",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Red-headed Woodpecker",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Red-legged Kittiwake",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Red-winged Blackbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Rhinoceros Auklet",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Ring-billed Gull",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Ringed Kingfisher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Rock Wren",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Rose-breasted Grosbeak",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Ruby-throated Hummingbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Rufous Hummingbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Rusty Blackbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Sage Thrasher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Savannah Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Sayornis",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Scarlet Tanager",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Scissor-tailed Flycatcher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Scott Oriole",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Seaside Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Shiny Cowbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Slaty-backed Gull",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Song Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Sooty Albatross",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Spotted Catbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Summer Tanager",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Swainson Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Tennessee Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Tree Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Tree Swallow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Tropical Kingbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Vermilion Flycatcher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Vesper Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Warbling Vireo",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Western Grebe",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Western Gull",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Western Meadowlark",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Western Wood Pewee",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Whip-poor-will",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "White Pelican",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "White-breasted Kingfisher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "White-breasted Nuthatch",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "White-crowned Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "White-eyed Vireo",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "White-necked Raven",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "White-throated Sparrow",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Wilson Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Winter Wren",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Worm-eating Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Yellow Warbler",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Yellow-bellied Flycatcher",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Yellow-billed Cuckoo",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Yellow-breasted Chat",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Yellow-headed Blackbird",
-    date: "",
-    seen: false,
-    image: ""
-  },
-  {
-    name: "Yellow-throated Vireo",
-    date: "",
-    seen: false,
-    image: ""
-  }
-  // Add more objects here
-];
-
-
-
-function findAddressByName(searchName) {
-  const foundItem = items.find(item => 
-    item.name.toLowerCase() === searchName.toLowerCase()
-  );
-  return foundItem ? foundItem.address : "Address not found";
-}
-
 function DexScreen() {
-    useEffect(() => {
-        const fetchBirdData = async () => {
-          try {
-            const response = await fetch('http://localhost:5001/api/get-gallery-data');
-            
-            if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            // Transform the data into a flat array of bird images
-            const allBirds = [];
-            
-            Object.entries(data.birds).forEach(([species, sightings]) => {
-              sightings.forEach(sighting => {
-                const index = findAddressByName(species);
-                items[index].imaege = `http://localhost:5001/${sighting.uri}`
-                items[index].seen = true;
-              });
-            });
 
-            
-            // Auto-show the gallery once data is loaded
-          } catch (err) {
-            console.error("Error fetching bird data:", err);
+    const [items, setItems] = useState({
+        "Acadian Flycatcher": { name: "Acadian Flycatcher", date: "", seen: false, image: "" },
+        "American Crow": { name: "American Crow", date: "", seen: false, image: "" },
+        "American Goldfinch": { name: "American Goldfinch", date: "", seen: false, image: "" },
+        "American Pipit": { name: "American Pipit", date: "", seen: false, image: "" },
+        "American Redstart": { name: "American Redstart", date: "", seen: false, image: "" },
+        "American Three-toed Woodpecker": { name: "American Three-toed Woodpecker", date: "", seen: false, image: "" },
+        "Anna Hummingbird": { name: "Anna Hummingbird", date: "", seen: false, image: "" },
+        "Artic Tern": { name: "Artic Tern", date: "", seen: false, image: "" },
+        "Baird Sparrow": { name: "Baird Sparrow", date: "", seen: false, image: "" },
+        "Baltimore Oriole": { name: "Baltimore Oriole", date: "", seen: false, image: "" },
+        "Bank Swallow": { name: "Bank Swallow", date: "", seen: false, image: "" },
+        "Barn Swallow": { name: "Barn Swallow", date: "", seen: false, image: "" },
+        "Bay-breasted Warbler": { name: "Bay-breasted Warbler", date: "", seen: false, image: "" },
+        "Belted Kingfisher": { name: "Belted Kingfisher", date: "", seen: false, image: "" },
+        "Bewick Wren": { name: "Bewick Wren", date: "", seen: false, image: "" },
+        "Black Tern": { name: "Black Tern", date: "", seen: false, image: "" },
+        "Black-and-white Warbler": { name: "Black-and-white Warbler", date: "", seen: false, image: "" },
+        "Black-billed Cuckoo": { name: "Black-billed Cuckoo", date: "", seen: false, image: "" },
+        "Black-capped Vireo": { name: "Black-capped Vireo", date: "", seen: false, image: "" },
+        "Black-footed Albatross": { name: "Black-footed Albatross", date: "", seen: false, image: "" },
+        "Black-throated Blue Warbler": { name: "Black-throated Blue Warbler", date: "", seen: false, image: "" },
+        "Black-throated Sparrow": { name: "Black-throated Sparrow", date: "", seen: false, image: "" },
+        "Blue Grosbeak": { name: "Blue Grosbeak", date: "", seen: false, image: "" },
+        "Blue Jay": { name: "Blue Jay", date: "", seen: false, image: "" },
+        "Blue-headed Vireo": { name: "Blue-headed Vireo", date: "", seen: false, image: "" },
+        "Blue-winged Warbler": { name: "Blue-winged Warbler", date: "", seen: false, image: "" },
+        "Boat-tailed Grackle": { name: "Boat-tailed Grackle", date: "", seen: false, image: "" },
+        "Bobolink": { name: "Bobolink", date: "", seen: false, image: "" },
+        "Bohemian Waxwing": { name: "Bohemian Waxwing", date: "", seen: false, image: "" },
+        "Brandt Cormorant": { name: "Brandt Cormorant", date: "", seen: false, image: "" },
+        "Brewer Blackbird": { name: "Brewer Blackbird", date: "", seen: false, image: "" },
+        "Brewer Sparrow": { name: "Brewer Sparrow", date: "", seen: false, image: "" },
+        "Bronzed Cowbird": { name: "Bronzed Cowbird", date: "", seen: false, image: "" },
+        "Brown Creeper": { name: "Brown Creeper", date: "", seen: false, image: "" },
+        "Brown Pelican": { name: "Brown Pelican", date: "", seen: false, image: "" },
+        "Brown Thrasher": { name: "Brown Thrasher", date: "", seen: false, image: "" },
+        "Cactus Wren": { name: "Cactus Wren", date: "", seen: false, image: "" },
+        "California Gull": { name: "California Gull", date: "", seen: false, image: "" },
+        "Canada Warbler": { name: "Canada Warbler", date: "", seen: false, image: "" },
+        "Cape Glossy Starling": { name: "Cape Glossy Starling", date: "", seen: false, image: "" },
+        "Cape May Warbler": { name: "Cape May Warbler", date: "", seen: false, image: "" },
+        "Cardinal": { name: "Cardinal", date: "", seen: false, image: "" },
+        "Carolina Wren": { name: "Carolina Wren", date: "", seen: false, image: "" },
+        "Caspian Tern": { name: "Caspian Tern", date: "", seen: false, image: "" },
+        "Cedar Waxwing": { name: "Cedar Waxwing", date: "", seen: false, image: "" },
+        "Cerulean Warbler": { name: "Cerulean Warbler", date: "", seen: false, image: "" },
+        "Chestnut-sided Warbler": { name: "Chestnut-sided Warbler", date: "", seen: false, image: "" },
+        "Chipping Sparrow": { name: "Chipping Sparrow", date: "", seen: false, image: "" },
+        "Chuck-will Widow": { name: "Chuck-will Widow", date: "", seen: false, image: "" },
+        "Clark Nutcracker": { name: "Clark Nutcracker", date: "", seen: false, image: "" },
+        "Clay-colored Sparrow": { name: "Clay-colored Sparrow", date: "", seen: false, image: "" },
+        "Cliff Swallow": { name: "Cliff Swallow", date: "", seen: false, image: "" },
+        "Common Raven": { name: "Common Raven", date: "", seen: false, image: "" },
+        "Common Tern": { name: "Common Tern", date: "", seen: false, image: "" },
+        "Common Yellowthroat": { name: "Common Yellowthroat", date: "", seen: false, image: "" },
+        "Crested Auklet": { name: "Crested Auklet", date: "", seen: false, image: "" },
+        "Dark-eyed Junco": { name: "Dark-eyed Junco", date: "", seen: false, image: "" },
+        "Downy Woodpecker": { name: "Downy Woodpecker", date: "", seen: false, image: "" },
+        "Eared Grebe": { name: "Eared Grebe", date: "", seen: false, image: "" },
+        "Eastern Towhee": { name: "Eastern Towhee", date: "", seen: false, image: "" },
+        "Elegant Tern": { name: "Elegant Tern", date: "", seen: false, image: "" },
+        "European Goldfinch": { name: "European Goldfinch", date: "", seen: false, image: "" },
+        "Evening Grosbeak": { name: "Evening Grosbeak", date: "", seen: false, image: "" },
+        "Field Sparrow": { name: "Field Sparrow", date: "", seen: false, image: "" },
+        "Fish Crow": { name: "Fish Crow", date: "", seen: false, image: "" },
+        "Florida Jay": { name: "Florida Jay", date: "", seen: false, image: "" },
+        "Forsters Tern": { name: "Forsters Tern", date: "", seen: false, image: "" },
+        "Fox Sparrow": { name: "Fox Sparrow", date: "", seen: false, image: "" },
+        "Frigatebird": { name: "Frigatebird", date: "", seen: false, image: "" },
+        "Gadwall": { name: "Gadwall", date: "", seen: false, image: "" },
+        "Geococcyx": { name: "Geococcyx", date: "", seen: false, image: "" },
+        "Glaucous-winged Gull": { name: "Glaucous-winged Gull", date: "", seen: false, image: "" },
+        "Golden-winged Warbler": { name: "Golden-winged Warbler", date: "", seen: false, image: "" },
+        "Grasshopper Sparrow": { name: "Grasshopper Sparrow", date: "", seen: false, image: "" },
+        "Gray Catbird": { name: "Gray Catbird", date: "", seen: false, image: "" },
+        "Gray Kingbird": { name: "Gray Kingbird", date: "", seen: false, image: "" },
+        "Gray-crowned Rosy Finch": { name: "Gray-crowned Rosy Finch", date: "", seen: false, image: "" },
+        "Great Crested Flycatcher": { name: "Great Crested Flycatcher", date: "", seen: false, image: "" },
+        "Great Grey Shrike": { name: "Great Grey Shrike", date: "", seen: false, image: "" },
+        "Green Jay": { name: "Green Jay", date: "", seen: false, image: "" },
+        "Green Kingfisher": { name: "Green Kingfisher", date: "", seen: false, image: "" },
+        "Green Violetear": { name: "Green Violetear", date: "", seen: false, image: "" },
+        "Green-tailed Towhee": { name: "Green-tailed Towhee", date: "", seen: false, image: "" },
+        "Groove-billed Ani": { name: "Groove-billed Ani", date: "", seen: false, image: "" },
+        "Harris Sparrow": { name: "Harris Sparrow", date: "", seen: false, image: "" },
+        "Heermann Gull": { name: "Heermann Gull", date: "", seen: false, image: "" },
+        "Henslow Sparrow": { name: "Henslow Sparrow", date: "", seen: false, image: "" },
+        "Herring Gull": { name: "Herring Gull", date: "", seen: false, image: "" },
+        "Hooded Merganser": { name: "Hooded Merganser", date: "", seen: false, image: "" },
+        "Hooded Oriole": { name: "Hooded Oriole", date: "", seen: false, image: "" },
+        "Hooded Warbler": { name: "Hooded Warbler", date: "", seen: false, image: "" },
+        "Horned Grebe": { name: "Horned Grebe", date: "", seen: false, image: "" },
+        "Horned Lark": { name: "Horned Lark", date: "", seen: false, image: "" },
+        "Horned Puffin": { name: "Horned Puffin", date: "", seen: false, image: "" },
+        "House Sparrow": { name: "House Sparrow", date: "", seen: false, image: "" },
+        "House Wren": { name: "House Wren", date: "", seen: false, image: "" },
+        "Indigo Bunting": { name: "Indigo Bunting", date: "", seen: false, image: "" },
+        "Ivory Gull": { name: "Ivory Gull", date: "", seen: false, image: "" },
+        "Kentucky Warbler": { name: "Kentucky Warbler", date: "", seen: false, image: "" },
+        "Laysan Albatross": { name: "Laysan Albatross", date: "", seen: false, image: "" },
+        "Lazuli Bunting": { name: "Lazuli Bunting", date: "", seen: false, image: "" },
+        "Le Conte Sparrow": { name: "Le Conte Sparrow", date: "", seen: false, image: "" },
+        "Least Auklet": { name: "Least Auklet", date: "", seen: false, image: "" },
+        "Least Flycatcher": { name: "Least Flycatcher", date: "", seen: false, image: "" },
+        "Least Tern": { name: "Least Tern", date: "", seen: false, image: "" },
+        "Lincoln Sparrow": { name: "Lincoln Sparrow", date: "", seen: false, image: "" },
+        "Loggerhead Shrike": { name: "Loggerhead Shrike", date: "", seen: false, image: "" },
+        "Long-tailed Jaeger": { name: "Long-tailed Jaeger", date: "", seen: false, image: "" },
+        "Louisiana Waterthrush": { name: "Louisiana Waterthrush", date: "", seen: false, image: "" },
+        "Magnolia Warbler": { name: "Magnolia Warbler", date: "", seen: false, image: "" },
+        "Mallard": { name: "Mallard", date: "", seen: false, image: "" },
+        "Mangrove Cuckoo": { name: "Mangrove Cuckoo", date: "", seen: false, image: "" },
+        "Marsh Wren": { name: "Marsh Wren", date: "", seen: false, image: "" },
+        "Mockingbird": { name: "Mockingbird", date: "", seen: false, image: "" },
+        "Mourning Warbler": { name: "Mourning Warbler", date: "", seen: false, image: "" },
+        "Myrtle Warbler": { name: "Myrtle Warbler", date: "", seen: false, image: "" },
+        "Nashville Warbler": { name: "Nashville Warbler", date: "", seen: false, image: "" },
+        "Nelson Sharp-tailed Sparrow": { name: "Nelson Sharp-tailed Sparrow", date: "", seen: false, image: "" },
+        "Nighthawk": { name: "Nighthawk", date: "", seen: false, image: "" },
+        "Northern Flicker": { name: "Northern Flicker", date: "", seen: false, image: "" },
+        "Northern Fulmar": { name: "Northern Fulmar", date: "", seen: false, image: "" },
+        "Northern Waterthrush": { name: "Northern Waterthrush", date: "", seen: false, image: "" },
+        "Olive-sided Flycatcher": { name: "Olive-sided Flycatcher", date: "", seen: false, image: "" },
+        "Orange-crowned Warbler": { name: "Orange-crowned Warbler", date: "", seen: false, image: "" },
+        "Orchard Oriole": { name: "Orchard Oriole", date: "", seen: false, image: "" },
+        "Ovenbird": { name: "Ovenbird", date: "", seen: false, image: "" },
+        "Pacific Loon": { name: "Pacific Loon", date: "", seen: false, image: "" },
+        "Painted Bunting": { name: "Painted Bunting", date: "", seen: false, image: "" },
+        "Palm Warbler": { name: "Palm Warbler", date: "", seen: false, image: "" },
+        "Parakeet Auklet": { name: "Parakeet Auklet", date: "", seen: false, image: "" },
+        "Pelagic Cormorant": { name: "Pelagic Cormorant", date: "", seen: false, image: "" },
+        "Philadelphia Vireo": { name: "Philadelphia Vireo", date: "", seen: false, image: "" },
+        "Pied Kingfisher": { name: "Pied Kingfisher", date: "", seen: false, image: "" },
+        "Pied-billed Grebe": { name: "Pied-billed Grebe", date: "", seen: false, image: "" },
+        "Pigeon Guillemot": { name: "Pigeon Guillemot", date: "", seen: false, image: "" },
+        "Pileated Woodpecker": { name: "Pileated Woodpecker", date: "", seen: false, image: "" },
+        "Pine Grosbeak": { name: "Pine Grosbeak", date: "", seen: false, image: "" },
+        "Pine Warbler": { name: "Pine Warbler", date: "", seen: false, image: "" },
+        "Pomarine Jaeger": { name: "Pomarine Jaeger", date: "", seen: false, image: "" },
+        "Prairie Warbler": { name: "Prairie Warbler", date: "", seen: false, image: "" },
+        "Prothonotary Warbler": { name: "Prothonotary Warbler", date: "", seen: false, image: "" },
+        "Purple Finch": { name: "Purple Finch", date: "", seen: false, image: "" },
+        "Red-bellied Woodpecker": { name: "Red-bellied Woodpecker", date: "", seen: false, image: "" },
+        "Red-breasted Merganser": { name: "Red-breasted Merganser", date: "", seen: false, image: "" },
+        "Red-cockaded Woodpecker": { name: "Red-cockaded Woodpecker", date: "", seen: false, image: "" },
+        "Red-eyed Vireo": { name: "Red-eyed Vireo", date: "", seen: false, image: "" },
+        "Red-faced Cormorant": { name: "Red-faced Cormorant", date: "", seen: false, image: "" },
+        "Red-headed Woodpecker": { name: "Red-headed Woodpecker", date: "", seen: false, image: "" },
+        "Red-legged Kittiwake": { name: "Red-legged Kittiwake", date: "", seen: false, image: "" },
+        "Red-winged Blackbird": { name: "Red-winged Blackbird", date: "", seen: false, image: "" },
+        "Rhinoceros Auklet": { name: "Rhinoceros Auklet", date: "", seen: false, image: "" },
+        "Ring-billed Gull": { name: "Ring-billed Gull", date: "", seen: false, image: "" },
+        "Ringed Kingfisher": { name: "Ringed Kingfisher", date: "", seen: false, image: "" },
+        "Rock Wren": { name: "Rock Wren", date: "", seen: false, image: "" },
+        "Rose-breasted Grosbeak": { name: "Rose-breasted Grosbeak", date: "", seen: false, image: "" },
+        "Ruby-throated Hummingbird": { name: "Ruby-throated Hummingbird", date: "", seen: false, image: "" },
+        "Rufous Hummingbird": { name: "Rufous Hummingbird", date: "", seen: false, image: "" },
+        "Rusty Blackbird": { name: "Rusty Blackbird", date: "", seen: false, image: "" },
+        "Sage Thrasher": { name: "Sage Thrasher", date: "", seen: false, image: "" },
+        "Savannah Sparrow": { name: "Savannah Sparrow", date: "", seen: false, image: "" },
+        "Sayornis": { name: "Sayornis", date: "", seen: false, image: "" },
+        "Scarlet Tanager": { name: "Scarlet Tanager", date: "", seen: false, image: "" },
+        "Scissor-tailed Flycatcher": { name: "Scissor-tailed Flycatcher", date: "", seen: false, image: "" },
+        "Scott Oriole": { name: "Scott Oriole", date: "", seen: false, image: "" },
+        "Seaside Sparrow": { name: "Seaside Sparrow", date: "", seen: false, image: "" },
+        "Shiny Cowbird": { name: "Shiny Cowbird", date: "", seen: false, image: "" },
+        "Slaty-backed Gull": { name: "Slaty-backed Gull", date: "", seen: false, image: "" },
+        "Song Sparrow": { name: "Song Sparrow", date: "", seen: false, image: "" },
+        "Sooty Albatross": { name: "Sooty Albatross", date: "", seen: false, image: "" },
+        "Spotted Catbird": { name: "Spotted Catbird", date: "", seen: false, image: "" },
+        "Summer Tanager": { name: "Summer Tanager", date: "", seen: false, image: "" },
+        "Swainson Warbler": { name: "Swainson Warbler", date: "", seen: false, image: "" },
+        "Tennessee Warbler": { name: "Tennessee Warbler", date: "", seen: false, image: "" },
+        "Tree Sparrow": { name: "Tree Sparrow", date: "", seen: false, image: "" },
+        "Tree Swallow": { name: "Tree Swallow", date: "", seen: false, image: "" },
+        "Tropical Kingbird": { name: "Tropical Kingbird", date: "", seen: false, image: "" },
+        "Vermilion Flycatcher": { name: "Vermilion Flycatcher", date: "", seen: false, image: "" },
+        "Vesper Sparrow": { name: "Vesper Sparrow", date: "", seen: false, image: "" },
+        "Warbling Vireo": { name: "Warbling Vireo", date: "", seen: false, image: "" },
+        "Western Grebe": { name: "Western Grebe", date: "", seen: false, image: "" },
+        "Western Gull": { name: "Western Gull", date: "", seen: false, image: "" },
+        "Western Meadowlark": { name: "Western Meadowlark", date: "", seen: false, image: "" },
+        "Western Wood Pewee": { name: "Western Wood Pewee", date: "", seen: false, image: "" },
+        "Whip-poor-will": { name: "Whip-poor-will", date: "", seen: false, image: "" },
+        "White Pelican": { name: "White Pelican", date: "", seen: false, image: "" },
+        "White-breasted Kingfisher": { name: "White-breasted Kingfisher", date: "", seen: false, image: "" },
+        "White-breasted Nuthatch": { name: "White-breasted Nuthatch", date: "", seen: false, image: "" },
+        "White-crowned Sparrow": { name: "White-crowned Sparrow", date: "", seen: false, image: "" },
+        "White-eyed Vireo": { name: "White-eyed Vireo", date: "", seen: false, image: "" },
+        "White-necked Raven": { name: "White-necked Raven", date: "", seen: false, image: "" },
+        "White-throated Sparrow": { name: "White-throated Sparrow", date: "", seen: false, image: "" },
+        "Wilson Warbler": { name: "Wilson Warbler", date: "", seen: false, image: "" },
+        "Winter Wren": { name: "Winter Wren", date: "", seen: false, image: "" },
+        "Worm-eating Warbler": { name: "Worm-eating Warbler", date: "", seen: false, image: "" },
+        "Yellow Warbler": { name: "Yellow Warbler", date: "", seen: false, image: "" },
+        "Yellow-bellied Flycatcher": { name: "Yellow-bellied Flycatcher", date: "", seen: false, image: "" },
+        "Yellow-billed Cuckoo": { name: "Yellow-billed Cuckoo", date: "", seen: false, image: "" },
+        "Yellow-breasted Chat": { name: "Yellow-breasted Chat", date: "", seen: false, image: "" },
+        "Yellow-headed Blackbird": { name: "Yellow-headed Blackbird", date: "", seen: false, image: "" },
+        "Yellow-throated Vireo": { name: "Yellow-throated Vireo", date: "", seen: false, image: "" },
+        });
+
+
+  useEffect(() => {
+    const fetchBirdData = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/get-gallery-data');
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Create a copy of the current items to update
+        const updatedItems = { ...items };
+
+        // Process the API response
+        Object.entries(data.birds).forEach(([species, sightings]) => {
+          // Transform the species name from lowercase to match the hash map keys
+          let formattedName = species
+            .split('.')[1] // Get the part after the dot
+            .replace(/_/g, ' ') // Replace underscores with spaces
+            .replace(/\b\w/g, char => char.toUpperCase()); // Capitalize first letter of each word
+
+          if (updatedItems[formattedName]) {
+            updatedItems[formattedName].image = `http://localhost:5001/${sightings[0].uri}`;
+            updatedItems[formattedName].seen = true;
           }
-        };
-    }, []);
+        });
+
+        // Update the state with the modified items
+        setItems(updatedItems);
+      } catch (err) {
+        console.error("Error fetching bird data:", err);
+      }
+    };
+
+    fetchBirdData();
+  }, []);
 
   return (
     <div id="dexHolder" className="">
-      {items.map((item, index) => (
+      {Object.entries(items).map(([key, item], index) => (
         <div
           key={index}
-          className={`polaroid dexItem ${item.seen ? "seen" : "unseen"}`
-          }
+          className={`polaroid dexItem ${item.seen ? "seen" : "unseen"}`}
           style={{
-            transform: `rotate(${Math.floor(-10+Math.random()*20)}deg)`
+            transform: `rotate(${Math.floor(-10 + Math.random() * 20)}deg)`
           }}
         >
           <img
-            src={item.seen ? "../src/assets/unseen.png" : "assets/unseen.png"}
+            src={item.seen ? item.image : "assets/unseen.png"}
             alt={item.name}
-            className={item.seen ? "../src/assets/unseen.png" : "placeholder"}
+            className={item.seen ? "" : "placeholder"}
           />
           <h3 className="font-bold text-lg">{item.name}</h3>
           <p className="text-sm text-gray-600">{item.date}</p>
         </div>
-      ))
-      }
-    </div >
+      ))}
+    </div>
   );
 }
 

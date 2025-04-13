@@ -9,7 +9,7 @@
 #dexHolder {
     display: flex;
     background: url("../../../public/assets/neutralPage.png");
-    background-size: contain;
+    background-size: cover;
     flex-direction: row;
     gap: 20px;
     height: 100vh;
