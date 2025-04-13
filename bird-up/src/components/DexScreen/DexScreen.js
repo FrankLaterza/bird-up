@@ -248,7 +248,21 @@ function DexScreen() {
   }, []);
 
   return (
-    <div id="dexHolder" className="">
+    <div>
+      <div className="dexProgressWrapper">
+        <div className="dexProgressText">
+          {Object.values(items).filter(item => item.seen).length} / {Object.keys(items).length} Birds Seen
+        </div>
+        <div className="dexProgressBar">
+          <div
+            className="dexProgressFill"
+            style={{
+              width: `${(Object.values(items).filter(item => item.seen).length / Object.keys(items).length) * 100}%`
+            }}
+          ></div>
+        </div>
+      </div>
+      <div id="dexHolder">
       {
         Object.entries(items).map(([key, item], index) => (
           <div
@@ -279,6 +293,7 @@ function DexScreen() {
         <div className="leaf"></div>
         <div className="leaf"></div>
         <div className="leaf"></div>
+      </div>
       </div>
     </div>
   );
