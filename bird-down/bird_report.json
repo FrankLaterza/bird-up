@@ -1,36 +1,88 @@
 {
     "username": "DEFAULT_USER",
     "birds": {
-        "075.green_jay": [
-            {
-                "uri": "bird_images/7394333b-0ecf-41e4-8f29-170be28f7302.jpg",
-                "rating": 38.6,
-                "description": "The green jay is a species of the New World jays, found in Central America, Mexico, and South Texas. Adults are about 27 cm (11 in) long and variable in color across their range; they usually have blue and black heads, green wings and mantle, bluish-green tails, black bills, yellow or brown eye rings, and dark legs. The basic diet consists of arthropods, vertebrates, seeds, and fruit. The nest is usually built in a thorny bush; the female incubates the clutch of three to five eggs. This is a common species of jay with a wide range and the International Union for Conservation of Nature has rated its conservation status as being of \"least concern\".",
-                "timestamp": "2025-04-13 04:11:53"
-            }
-        ],
-        "137.cliff_swallow": [
-            {
-                "uri": "bird_images/f3646ee4-36c7-44ca-80c2-2f5770c7dd66.jpg",
-                "rating": 35.88,
-                "description": "Petrochelidon is a genus of birds known as cliff-nesting swallows. The genus name Petrochelidon is from the Greek words petra, \"rock\", and khelidon, \"swallow\".",
-                "timestamp": "2025-04-13 05:09:12"
-            }
-        ],
-        "178.swainson_warbler": [
-            {
-                "uri": "bird_images/2ca85981-747c-421a-ae88-842c7cb34048.jpg",
-                "rating": 17.46,
-                "description": "Swainson's warbler is a small species of New World warbler. It is monotypic, the only member of the genus Limnothlypis. Swainson's warbler was named after William Swainson, an English ornithologist.",
-                "timestamp": "2025-04-13 05:25:00"
-            }
-        ],
         "108.white_necked_raven": [
             {
-                "uri": "bird_images/5eaa13a1-ba57-4355-83f0-eee37ac80471.jpg",
-                "rating": 48.95,
+                "uri": "bird_images\\38f6e415-38e7-44e0-ae1e-660598052e2f.jpg",
+                "rating": 27.45,
                 "description": "The white-necked raven is a species of raven native to eastern and southern Africa. It is somewhat smaller than the common raven or its nearest relative, the thick-billed raven C. crassirostris.",
-                "timestamp": "2025-04-13 05:29:15"
+                "timestamp": "2025-04-13 07:39:52"
+            },
+            {
+                "uri": "bird_images\\4516529f-02cf-4a04-8570-32977982994a.jpg",
+                "rating": 26.83,
+                "description": "The white-necked raven is a species of raven native to eastern and southern Africa. It is somewhat smaller than the common raven or its nearest relative, the thick-billed raven C. crassirostris.",
+                "timestamp": "2025-04-13 07:40:29"
+            },
+            {
+                "uri": "bird_images\\889e8e21-d4b2-47b2-a734-43be7407d6d0.jpg",
+                "rating": 13.53,
+                "description": "The white-necked raven is a species of raven native to eastern and southern Africa. It is somewhat smaller than the common raven or its nearest relative, the thick-billed raven C. crassirostris.",
+                "timestamp": "2025-04-13 07:44:06"
+            },
+            {
+                "uri": "bird_images\\704d1cb6-c188-4a80-9228-c3071a28dd26.jpg",
+                "rating": 45.86,
+                "description": "The white-necked raven is a species of raven native to eastern and southern Africa. It is somewhat smaller than the common raven or its nearest relative, the thick-billed raven C. crassirostris.",
+                "timestamp": "2025-04-13 07:53:09"
+            }
+        ],
+        "001.black_footed_albatross": [
+            {
+                "uri": "bird_images\\702b362b-1bcd-4f52-a620-81c20c2ce212.jpg",
+                "rating": 23.95,
+                "description": "No description available.",
+                "timestamp": "2025-04-13 07:40:14"
+            },
+            {
+                "uri": "bird_images\\84f7b15f-e3e4-4d97-88c9-f705445cda5c.jpg",
+                "rating": 31.08,
+                "description": "No description available.",
+                "timestamp": "2025-04-13 07:40:21"
+            },
+            {
+                "uri": "bird_images\\911989e3-db0d-4d51-953b-943b31f1ef2a.jpg",
+                "rating": 39.95,
+                "description": "No description available.",
+                "timestamp": "2025-04-13 07:53:54"
+            }
+        ],
+        "101.white_pelican": [
+            {
+                "uri": "bird_images\\ff940bd9-6d9e-4095-b209-a66a115e53c3.jpg",
+                "rating": 30.04,
+                "description": "White pelican may refer to:",
+                "timestamp": "2025-04-13 07:43:06"
+            }
+        ],
+        "126.nelson_sharp_tailed_sparrow": [
+            {
+                "uri": "bird_images\\73e51808-5e6b-4042-a7a9-a5fec0ca5859.jpg",
+                "rating": 12.55,
+                "description": "Nelson's sparrow is a small New World sparrow.",
+                "timestamp": "2025-04-13 07:43:30"
+            }
+        ],
+        "168.kentucky_warbler": [
+            {
+                "uri": "bird_images\\d291a4a8-0b83-4773-90d6-6b28682b1448.jpg",
+                "rating": 30.45,
+                "description": "The Kentucky warbler is a small species of New World warbler. It is a sluggish and heavy warbler with a short tail, preferring to spend most of its time on or near the ground, except when singing.",
+                "timestamp": "2025-04-13 07:45:19"
+            },
+            {
+                "uri": "bird_images\\103b5ed5-a4e6-4d61-8943-223066c2f1f2.jpg",
+                "rating": 56.79,
+                "description": "The Kentucky warbler is a small species of New World warbler. It is a sluggish and heavy warbler with a short tail, preferring to spend most of its time on or near the ground, except when singing.",
+                "timestamp": "2025-04-13 07:49:59"
+            }
+        ],
+        "084.red_legged_kittiwake": [
+            {
+                "uri": "bird_images\\0a9cf899-2790-4db8-a5bd-97056a6a543f.jpg",
+                "rating": 29.92,
+                "description": "The red-legged kittiwake is a seabird species in the gull family Laridae. It breeds in the Pribilof Islands, Bogoslof Island, and Buldir Island in the Bering Sea off the coast of Alaska, and the Commander Islands, Russia, and spends the winter at sea.",
+                "timestamp": "2025-04-13 07:53:26"
             }
         ]
     }

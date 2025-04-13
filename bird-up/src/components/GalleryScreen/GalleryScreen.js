@@ -9,7 +9,7 @@ const GalleryScreen = () => {
   useEffect(() => {
     const fetchBirdData = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/get-gallery-data');
+        const response = await fetch('https://birdup-backend.ngrok.app/api/get-gallery-data');
         
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -22,7 +22,7 @@ const GalleryScreen = () => {
         Object.entries(data.birds).forEach(([species, sightings]) => {
           sightings.forEach(sighting => {
             allBirds.push({
-              imageUrl: `http://localhost:5001/${sighting.uri}`
+              imageUrl: `https://birdup-backend.ngrok.app/${sighting.uri}`
             });
           });
         });

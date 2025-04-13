@@ -126,7 +126,7 @@ const GalleryOverlay = ({ onClose }) => {
       try {
         // Add cache-busting query parameter to prevent caching
         const cacheBuster = Date.now();
-        const response = await fetch(`http://localhost:5001/api/get-gallery-data?t=${cacheBuster}`);
+        const response = await fetch(`https://birdup-backend.ngrok.app/api/get-gallery-data?t=${cacheBuster}`);
         
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -144,7 +144,7 @@ const GalleryOverlay = ({ onClose }) => {
             const filename = sighting.uri.split('/').pop();
             
             allBirds.push({
-              imageUrl: `http://localhost:5001/${sighting.uri}?t=${cacheBuster}`,
+              imageUrl: `https://birdup-backend.ngrok.app/${sighting.uri}?t=${cacheBuster}`,
               id: filename,
               species: species,
               rating: sighting.rating,

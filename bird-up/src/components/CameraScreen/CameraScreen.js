@@ -184,7 +184,7 @@ function CameraScreen() {
       formData.append('image', blob, 'image.jpg');
       
       // Send the image to our API endpoint
-      fetch('http://localhost:5001/api/upload-image', {
+      fetch('https://birdup-backend.ngrok.app/api/upload-image', {
         method: 'POST',
         body: formData,
       })

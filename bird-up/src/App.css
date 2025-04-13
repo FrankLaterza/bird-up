@@ -9,6 +9,9 @@ body {
   overflow: hidden;
   height: 100%;
   width: 100vw;
+  /* scrollbar-gutter: stable; */
+  /* scrollbar-color: #ddd rgba(0, 0, 0, 0); */
+  scrollbar-track-color: rgba(0, 0, 0, 0);
 }
 
 .App {
@@ -21,7 +24,7 @@ body {
 
 #uiOverlay {
   width: 100%;
-  height: 85%;
+  height: 98%;
   position: absolute;
   z-index: 8;
   margin: 0px;

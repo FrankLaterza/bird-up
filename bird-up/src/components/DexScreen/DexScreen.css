@@ -1,5 +1,6 @@
 :root {
     --dexEntrySize: 200px;
+    --pinSize: 100px;
 }
 
 .DexScreen {
@@ -11,7 +12,7 @@
     background: url("../../../public/assets/neutralPage.png");
     background-size: cover;
     flex-direction: row;
-    gap: 20px;
+    gap: 50px;
     height: 100vh;
     flex-wrap: wrap;
     justify-content: center;
@@ -21,11 +22,14 @@
 
 .polaroid ::before {
     border-radius: 100%;
-    background-color: red;
-    color: red;
+    background: url("../../../public/assets/Thumbtack.png");
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: 5px 5px;
+    color: rgba(0, 0, 0, 0);
     content: ".";
-    width: 30px !important;
-    height: 30px !important;
+    width: var(--pinSize) !important;
+    height: var(--pinSize) !important;
     position: absolute;
     margin: auto;
     left: 0px;

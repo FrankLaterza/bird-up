@@ -71,7 +71,7 @@ function MapScreen() {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:5001/api/get-bird-sightings?lat=${lat}&lng=${lng}`
+        `https://birdup-backend.ngrok.app/api/get-bird-sightings?lat=${lat}&lng=${lng}`
       );
       if (!response.ok) throw new Error('API request failed');
       const data = await response.json();

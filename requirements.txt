@@ -2,11 +2,15 @@
 # $ conda create --name <env> --file <this file>
 # platform: win-64
 ca-certificates=2025.2.25=haa95532_0
-charset-normalizer=3.4.1=pypi_0
-flask-cors=5.0.1=pypi_0
-opencv-python=4.11.0.86=pypi_0
-py-cpuinfo=9.0.0=pypi_0
-python-dateutil=2.9.0.post0=pypi_0
-python-dotenv=1.1.0=pypi_0
-typing-extensions=4.13.2=pypi_0
-ultralytics-thop=2.0.14=pypi_0
+pip
+# Optional: Any other conda packages you want
+
+# pip packages:
+pip:
+  - flask-cors==5.0.1
+  - opencv-python==4.11.0.86
+  - py-cpuinfo==9.0.0
+  - python-dateutil==2.9.0.post0
+  - python-dotenv==1.1.0
+  - typing-extensions==4.13.2
+  - ultralytics-thop==2.0.14
