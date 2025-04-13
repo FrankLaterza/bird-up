@@ -6,7 +6,7 @@ const items = [
   {
     name: "Acadian Flycatcher",
     date: "",
-    seen: true,
+    seen: false,
     image: ""
   },
   {
@@ -1206,7 +1206,43 @@ const items = [
   // Add more objects here
 ];
 
+
+
+function findAddressByName(searchName) {
+  const foundItem = items.find(item => 
+    item.name.toLowerCase() === searchName.toLowerCase()
+  );
+  return foundItem ? foundItem.address : "Address not found";
+}
+
 function DexScreen() {
+    const fetchBirdData = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/get-gallery-data');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        // Transform the data into a flat array of bird images
+        const allBirds = [];
+        
+        Object.entries(data.birds).forEach(([species, sightings]) => {
+          sightings.forEach(sighting => {
+            const index = findAddressByName(species);
+            items[index].imaege = `http://localhost:5001/${sighting.uri}`
+            items[index].seen = true;
+          });
+        });
+
+        
+        // Auto-show the gallery once data is loaded
+      } catch (err) {
+        console.error("Error fetching bird data:", err);
+      }
+    };
+
   return (
     <div id="dexHolder" className="">
       {items.map((item, index) => (
@@ -1231,9 +1267,5 @@ function DexScreen() {
     </div >
   );
 }
-
-// MapScreen.propTypes = {};
-
-// MapScreen.defaultProps = {};
 
 export default DexScreen;
