@@ -16,6 +16,22 @@
                 "description": "Petrochelidon is a genus of birds known as cliff-nesting swallows. The genus name Petrochelidon is from the Greek words petra, \"rock\", and khelidon, \"swallow\".",
                 "timestamp": "2025-04-13 05:09:12"
             }
+        ],
+        "178.swainson_warbler": [
+            {
+                "uri": "bird_images/2ca85981-747c-421a-ae88-842c7cb34048.jpg",
+                "rating": 17.46,
+                "description": "Swainson's warbler is a small species of New World warbler. It is monotypic, the only member of the genus Limnothlypis. Swainson's warbler was named after William Swainson, an English ornithologist.",
+                "timestamp": "2025-04-13 05:25:00"
+            }
+        ],
+        "108.white_necked_raven": [
+            {
+                "uri": "bird_images/5eaa13a1-ba57-4355-83f0-eee37ac80471.jpg",
+                "rating": 48.95,
+                "description": "The white-necked raven is a species of raven native to eastern and southern Africa. It is somewhat smaller than the common raven or its nearest relative, the thick-billed raven C. crassirostris.",
+                "timestamp": "2025-04-13 05:29:15"
+            }
         ]
     }
 }
