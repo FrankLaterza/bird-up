@@ -1,19 +1,26 @@
-.CameraScreen {
-    background-color: yellowgreen !important;
-    color:black !important;
+html,
+body {
+    overflow: hidden;
+    height: 100%;
+    width: 100vw;
 }
 
-.cameraBox{
-    height:100vh;
+.CameraScreen {
+    background-color: yellowgreen !important;
+    color: black !important;
+}
+
+.cameraBox {
+    height: 100vh;
     overflow: hidden;
 }
 
-.definitelyHide{
-    display:none !important;
+.definitelyHide {
+    display: none !important;
 }
 
-.photo{
-    height:100vh;
+.photo {
+    height: 100vh;
     overflow: hidden !important;
     object-fit:contain;
 }

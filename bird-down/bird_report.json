@@ -1,46 +1,12 @@
 {
     "username": "DEFAULT_USER",
     "birds": {
-        "170.mourning_warbler": [
+        "075.green_jay": [
             {
-                "uri": "bird_images\\1d650cf6-7f67-49a9-ad5f-aa3cf69d9a36.jpg",
-                "rating": 25.48,
-                "description": "No description available.",
-                "timestamp": "2025-04-13 02:24:28"
-            },
-            {
-                "uri": "bird_images\\e378429d-ccef-46c1-8338-bad2d685ce8c.jpg",
-                "rating": 24.95,
-                "description": "No description available.",
-                "timestamp": "2025-04-13 02:26:37"
-            },
-            {
-                "uri": "bird_images\\8a83d340-6006-4950-98fa-e99c17871527.jpg",
-                "rating": 26.72,
-                "description": "The mourning warbler is a small songbird of the New World warbler family. Mourning warblers are native to eastern and central North America as well as some countries in Central America. They are neotropical migrants and tend to be found in dense second growth forests. They are under the Wood-warbler category, which consists of arboreal and terrestrial colorful passerines. Wood warblers are in the order Passeriformes, which are perching birds including more than half of all bird species, and the family Parulidae which also includes the Common Yellowthroat, Black and White Warbler, Nashville Warbler, ovenbird, and American Redstart. They are very similar to the MacGillivray's Warbler in appearance, especially in females and immature birds, but their breeding range does not overlap into the west.",
-                "timestamp": "2025-04-13 02:33:15"
-            }
-        ],
-        "105.whip_poor_will": [
-            {
-                "uri": "bird_images\\7b3fa962-1379-4570-bd84-9abed7abebac.jpg",
-                "rating": 26.62,
-                "description": "No description available.",
-                "timestamp": "2025-04-13 02:27:47"
-            }
-        ],
-        "008.rhinoceros_auklet": [
-            {
-                "uri": "bird_images\\3f326a9d-75df-47e7-bb78-f2e1dd855375.jpg",
-                "rating": 18.41,
-                "description": "No description available.",
-                "timestamp": "2025-04-13 02:28:46"
-            },
-            {
-                "uri": "bird_images\\916e6c3d-1d2d-44f8-be54-d2f5ce28b1d7.jpg",
-                "rating": 43.32,
-                "description": "No description available.",
-                "timestamp": "2025-04-13 02:32:12"
+                "uri": "bird_images/7394333b-0ecf-41e4-8f29-170be28f7302.jpg",
+                "rating": 38.6,
+                "description": "The green jay is a species of the New World jays, found in Central America, Mexico, and South Texas. Adults are about 27 cm (11 in) long and variable in color across their range; they usually have blue and black heads, green wings and mantle, bluish-green tails, black bills, yellow or brown eye rings, and dark legs. The basic diet consists of arthropods, vertebrates, seeds, and fruit. The nest is usually built in a thorny bush; the female incubates the clutch of three to five eggs. This is a common species of jay with a wide range and the International Union for Conservation of Nature has rated its conservation status as being of \"least concern\".",
+                "timestamp": "2025-04-13 04:11:53"
             }
         ]
     }

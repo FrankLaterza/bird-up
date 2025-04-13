@@ -235,7 +235,6 @@ function CameraScreen() {
         <video className="player definitelyHide" ref={videoRef}></video>
         <div className="strip" ref={stripRef}></div>
       </div>
-      
       {/* Display the CaughtCard when we have bird data */}
       {capturedImage && birdData && (
         <CaughtCard 
