@@ -6,7 +6,7 @@ import OSM from "ol/source/OSM";
 import VectorSource from "ol/source/Vector";
 import Feature from "ol/Feature";
 import { Point, Circle } from "ol/geom";
-import { Style, Fill, Stroke, Icon, Circle as CircleStyle } from "ol/style";
+import { Style, Fill, Stroke, Icon, Text, Circle as CircleStyle } from 'ol/style';
 import './MapScreen.css';
 import "ol/ol.css";
 import { useGeographic, transform } from 'ol/proj.js';
@@ -41,18 +41,31 @@ function MapScreen() {
 
   const circleStyle = new Style({
     fill: new Fill({ color: 'rgba(0, 0, 255, 0.1)' }),
-    stroke: new Stroke({ color: 'rgba(0, 0, 255, 0.8)', 
-    width: 2 })
-  });
-
-  // Use Icon for bird markers
-  const birdStyle = new Style({
-    image: new Icon({
-      anchor: [0.5, 0.5],
-      src: iconImagePath,
-      scale: 0.03
+    stroke: new Stroke({ 
+      color: 'rgba(0, 0, 255, 0.8)', 
+      width: 2 
     })
   });
+
+  const createBirdStyle = (feature) => {
+    return new Style({
+      image: new Icon({
+        anchor: [0.5, 0.5],
+        src: iconImagePath,
+        scale: 0.03
+      }),
+      text: new Text({
+        text: feature.get('comName')?.replace(/_/g, ' ') || 'Unknown Bird',
+        offsetY: 24,
+        fill: new Fill({ color: '#000' }),
+        stroke: new Stroke({
+          color: '#fff',
+          width: 2
+        }),
+        font: 'bold 14px Calibri,sans-serif'
+      })
+    });
+  };
 
   const fetchBirdSightings = async (lat, lng) => {
     setLoading(true);
@@ -62,11 +75,8 @@ function MapScreen() {
       );
       if (!response.ok) throw new Error('API request failed');
       const data = await response.json();
-      console.log('Bird sightings data:', data);
-      // Clear previous bird features
       birdSourceRef.current.clear();
 
-      // Add new bird features
       const birdFeatures = [];
       
       data.forEach(sighting => {
@@ -76,31 +86,34 @@ function MapScreen() {
           'EPSG:3857'
         );
         
-        // Create point feature (bird marker)
+        // Create marker feature with bird name
         const markerFeature = new Feature({
           geometry: new Point(coords),
-          ...sighting,
+          comName: sighting.comName,
+          lat: sighting.lat,
+          lng: sighting.lng,
+          obsDt: sighting.obsDt,
           featureType: 'marker'
         });
-        markerFeature.setStyle(birdStyle);
+        markerFeature.setStyle(createBirdStyle(markerFeature));
         
-        // Create circle feature around the bird (with 100m radius)
+        // Create circle feature
         const circleFeature = new Feature({
           geometry: new Circle(coords, 1000),
-          ...sighting,
           featureType: 'circle'
         });
         circleFeature.setStyle(new Style({
           fill: new Fill({ color: 'rgba(0, 0, 255, 0.1)' }),
-          stroke: new Stroke({ color: 'rgba(0, 0, 255, 0.6)', width: 1.5 })
+          stroke: new Stroke({ 
+            color: 'rgba(0, 0, 255, 0.6)', 
+            width: 1.5 
+          })
         }));
         
-        // Add both features
         birdFeatures.push(markerFeature, circleFeature);
       });
       
       birdSourceRef.current.addFeatures(birdFeatures);
-      console.log(`Added ${data.length} bird markers with circles to the map`);
       setError(null);
     } catch (err) {
       setError(err.message);
@@ -118,7 +131,6 @@ function MapScreen() {
         new VectorLayer({ source: userSourceRef.current }),
         new VectorLayer({ 
           source: birdSourceRef.current,
-          // Add explicit zIndex to ensure bird layer is on top
           zIndex: 10
         })
       ],
@@ -137,8 +149,6 @@ function MapScreen() {
 
     map.on('moveend', handleMapMove);
     mapInstanceRef.current = map;
-
-    // Initial fetch
     fetchBirdSightings(38.9861, -76.939);
 
     return () => {
@@ -162,7 +172,7 @@ function MapScreen() {
         geometry: new Point(coords),
         ...point
       });
-      marker.setStyle(birdStyle);
+      marker.setStyle(createBirdStyle(marker));
 
       const circle = new Feature({
         geometry: new Circle(coords, point.radius),
@@ -197,3 +207,4 @@ function MapScreen() {
 }
 
 export default MapScreen;
+
