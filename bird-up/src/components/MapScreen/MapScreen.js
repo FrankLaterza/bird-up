@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
 import Map from "ol/Map";
+import React, { useEffect, useRef, useState } from "react";
 import View from "ol/View";
 import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
 import OSM from "ol/source/OSM";
 import VectorSource from "ol/source/Vector";
 import Feature from "ol/Feature";
 import { Point, Circle } from "ol/geom";
-import { Style, Fill, Stroke, Icon } from "ol/style";
+import { Style, Fill, Stroke, Icon, Circle as CircleStyle } from "ol/style";
 import './MapScreen.css';
 import "ol/ol.css";
 import { useGeographic, transform } from 'ol/proj.js';
@@ -39,25 +39,18 @@ function MapScreen() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Style configurations
-  const iconStyle = new Style({
-    image: new Icon({
-      anchor: [0.5, 0.5],
-      src: iconImagePath,
-      scale: 0.02
-    })
-  });
-
   const circleStyle = new Style({
     fill: new Fill({ color: 'rgba(0, 0, 255, 0.1)' }),
-    stroke: new Stroke({ color: 'rgba(0, 0, 255, 0.8)', width: 2 })
+    stroke: new Stroke({ color: 'rgba(0, 0, 255, 0.8)', 
+    width: 2 })
   });
 
+  // Use Icon for bird markers
   const birdStyle = new Style({
     image: new Icon({
       anchor: [0.5, 0.5],
-      src: 'https://docs.maptiler.com/openlayers/default-marker.png',
-      scale: 0.8
+      src: iconImagePath,
+      scale: 0.03
     })
   });
 
@@ -69,26 +62,45 @@ function MapScreen() {
       );
       if (!response.ok) throw new Error('API request failed');
       const data = await response.json();
-      
+      console.log('Bird sightings data:', data);
       // Clear previous bird features
       birdSourceRef.current.clear();
 
       // Add new bird features
-      const birdFeatures = data.map(sighting => {
+      const birdFeatures = [];
+      
+      data.forEach(sighting => {
         const coords = transform(
           [sighting.lng, sighting.lat],
           'EPSG:4326',
           'EPSG:3857'
         );
-        const feature = new Feature({
+        
+        // Create point feature (bird marker)
+        const markerFeature = new Feature({
           geometry: new Point(coords),
-          ...sighting
+          ...sighting,
+          featureType: 'marker'
         });
-        feature.setStyle(birdStyle);
-        return feature;
+        markerFeature.setStyle(birdStyle);
+        
+        // Create circle feature around the bird (with 100m radius)
+        const circleFeature = new Feature({
+          geometry: new Circle(coords, 1000),
+          ...sighting,
+          featureType: 'circle'
+        });
+        circleFeature.setStyle(new Style({
+          fill: new Fill({ color: 'rgba(0, 0, 255, 0.1)' }),
+          stroke: new Stroke({ color: 'rgba(0, 0, 255, 0.6)', width: 1.5 })
+        }));
+        
+        // Add both features
+        birdFeatures.push(markerFeature, circleFeature);
       });
       
       birdSourceRef.current.addFeatures(birdFeatures);
+      console.log(`Added ${data.length} bird markers with circles to the map`);
       setError(null);
     } catch (err) {
       setError(err.message);
@@ -104,7 +116,11 @@ function MapScreen() {
       layers: [
         new TileLayer({ source: new OSM() }),
         new VectorLayer({ source: userSourceRef.current }),
-        new VectorLayer({ source: birdSourceRef.current })
+        new VectorLayer({ 
+          source: birdSourceRef.current,
+          // Add explicit zIndex to ensure bird layer is on top
+          zIndex: 10
+        })
       ],
       view: new View({
         center: transform([-76.939, 38.9861], 'EPSG:4326', 'EPSG:3857'),
@@ -146,7 +162,7 @@ function MapScreen() {
         geometry: new Point(coords),
         ...point
       });
-      marker.setStyle(iconStyle);
+      marker.setStyle(birdStyle);
 
       const circle = new Feature({
         geometry: new Circle(coords, point.radius),
@@ -181,4 +197,3 @@ function MapScreen() {
 }
 
 export default MapScreen;
-
