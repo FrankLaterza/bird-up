@@ -145,7 +145,13 @@ def upload_image():
             'success': True,
             'message': 'Image uploaded successfully',
             'filename': unique_filename,
-            'path': file_path
+            'path': file_path,
+            'bird_data': {
+                'species': best_bird,
+                'probability': float(best_prob),
+                'quality_score': float(quality_score),
+                'description': description
+            }
         })
     
     return jsonify({'error': 'File type not allowed'}), 400
