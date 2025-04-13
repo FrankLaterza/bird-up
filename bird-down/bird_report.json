@@ -1,34 +1,46 @@
 {
     "username": "DEFAULT_USER",
     "birds": {
-        "141.artic_tern": [
+        "170.mourning_warbler": [
             {
-                "uri": "bird_images/1e960ec4-db62-4ddb-a792-d7c5ea38d1cd.jpg",
-                "rating": 23.23,
-                "description": "this is a description",
-                "timestamp": "2025-04-12 23:25:50"
-            }
-        ],
-        "137.cliff_swallow": [
-            {
-                "uri": "bird_images/66aaf301-2e46-446d-9c10-470d95db92e7.jpg",
-                "rating": 20.75,
-                "description": "this is a description",
-                "timestamp": "2025-04-12 23:25:51"
-            }
-        ],
-        "001.black_footed_albatross": [
-            {
-                "uri": "bird_images/0920f754-de90-45d9-a9cf-dbc5b4e6d932.jpg",
-                "rating": 34.82,
-                "description": "this is a description",
-                "timestamp": "2025-04-12 23:25:53"
+                "uri": "bird_images\\1d650cf6-7f67-49a9-ad5f-aa3cf69d9a36.jpg",
+                "rating": 25.48,
+                "description": "No description available.",
+                "timestamp": "2025-04-13 02:24:28"
             },
             {
-                "uri": "bird_images/a742912a-c56c-46bd-8f32-39c86edff41c.jpg",
-                "rating": 22.47,
-                "description": "this is a description",
-                "timestamp": "2025-04-12 23:25:55"
+                "uri": "bird_images\\e378429d-ccef-46c1-8338-bad2d685ce8c.jpg",
+                "rating": 24.95,
+                "description": "No description available.",
+                "timestamp": "2025-04-13 02:26:37"
+            },
+            {
+                "uri": "bird_images\\8a83d340-6006-4950-98fa-e99c17871527.jpg",
+                "rating": 26.72,
+                "description": "The mourning warbler is a small songbird of the New World warbler family. Mourning warblers are native to eastern and central North America as well as some countries in Central America. They are neotropical migrants and tend to be found in dense second growth forests. They are under the Wood-warbler category, which consists of arboreal and terrestrial colorful passerines. Wood warblers are in the order Passeriformes, which are perching birds including more than half of all bird species, and the family Parulidae which also includes the Common Yellowthroat, Black and White Warbler, Nashville Warbler, ovenbird, and American Redstart. They are very similar to the MacGillivray's Warbler in appearance, especially in females and immature birds, but their breeding range does not overlap into the west.",
+                "timestamp": "2025-04-13 02:33:15"
+            }
+        ],
+        "105.whip_poor_will": [
+            {
+                "uri": "bird_images\\7b3fa962-1379-4570-bd84-9abed7abebac.jpg",
+                "rating": 26.62,
+                "description": "No description available.",
+                "timestamp": "2025-04-13 02:27:47"
+            }
+        ],
+        "008.rhinoceros_auklet": [
+            {
+                "uri": "bird_images\\3f326a9d-75df-47e7-bb78-f2e1dd855375.jpg",
+                "rating": 18.41,
+                "description": "No description available.",
+                "timestamp": "2025-04-13 02:28:46"
+            },
+            {
+                "uri": "bird_images\\916e6c3d-1d2d-44f8-be54-d2f5ce28b1d7.jpg",
+                "rating": 43.32,
+                "description": "No description available.",
+                "timestamp": "2025-04-13 02:32:12"
             }
         ]
     }

@@ -1,3 +1,4 @@
+import json
 from flask import Flask, jsonify, request, send_from_directory
 import requests
 import os
@@ -34,17 +35,20 @@ def load_bird_descriptions(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         content = file.read()
 
-    entries = re.split(r'\n\d+\.\s+', content)[1:]
+    entries = re.split(r'\n\d+\.\s*', content)[1:]
     for entry in entries:
         lines = entry.strip().split('\n', 1)
         if len(lines) == 2:
             name, desc = lines
-            key = re.sub(r'[ -]+', '_', name.strip())
+            name = (re.sub(r'^\d+\.\s*', '', name.strip())).lower()
+            key = re.sub(r'[ -]+', '_', name)
             descriptions[key] = desc.strip()
     return descriptions
 
+
 BIRD_DESCRIPTION_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bird_descs.txt')
 bird_descriptions = load_bird_descriptions(BIRD_DESCRIPTION_FILE)
+print(bird_descriptions)
 
 def clean_bird_data(bird_data):
     cleaned_data = []
@@ -126,7 +130,9 @@ def upload_image():
         best_bird, best_prob = results[0]
         print(best_bird, best_prob, file_path, quality_score)
 
-        normalized_bird_name = re.sub(r'[ -]+', '_', best_bird.strip())
+
+        normalized_bird_name = (re.sub(r'[ -]+', '_', re.sub(r'^\d+\.\s*', '', best_bird.strip()))).lower()
+        print(normalized_bird_name)
         description = bird_descriptions.get(normalized_bird_name, "No description available.")
 
         bird_db = BirdSightingManager()
