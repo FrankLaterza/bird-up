@@ -223,16 +223,18 @@ function CameraScreen() {
     <div id="cameraBox" className="screen">
       <div className="photobooth">
         <div className="controls">
-          <button 
+          {/* <button 
             onClick={takePhoto} 
             disabled={isUploading}
           >
             {isUploading ? 'Processing...' : 'Take Photo'}
-          </button>
+          </button> */}
         </div>
 
         <canvas className="photo" ref={canvasRef}></canvas>
-        <video className="player definitelyHide" ref={videoRef}></video>
+        <video className="player definitelyHide" ref={videoRef}></video>        
+        <button id="photoButton" className="" onClick={takePhoto}>Chz</button>
+        
         <div className="strip" ref={stripRef}></div>
       </div>
       {/* Display the CaughtCard when we have bird data */}

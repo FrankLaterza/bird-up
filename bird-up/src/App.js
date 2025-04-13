@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import Map from 'ol/Map';
 import { FaCamera } from "react-icons/fa6";
+import { IoBookOutline } from "react-icons/io5";
+import { GrGallery } from "react-icons/gr";
 import { TiThMenu } from "react-icons/ti";
 
 import MapScreen from './components/MapScreen/MapScreen';
@@ -79,10 +81,10 @@ function App() {
         <button id="closeAll" className="antiMapAsset topLeftButton" onClick={() => updateScreen(MAP_SCREEN)}>X</button>
         <button id="openCamera" className="mapAsset bottomButton centeredButton" onClick={() => updateScreen(CAMERA_SCREEN)}><FaCamera size="3.2em" />
         </button>
-        <button id="expandMenu" className="mapAsset bottomButton right" onMouseDown={() => toggleMenu()}><TiThMenu size="3.2em" /></button>
+        <button id="expandMenu" className="mapAsset bottomButton right smaller" onMouseDown={() => toggleMenu()}><TiThMenu size="3.2em" /></button>
 
-        <button id="openDex" className="mapAsset expandAsset bottomButton smaller" onMouseUp={() => updateScreen(DEX_SCREEN)}>Open Dex</button>
-        <button id="openGallery" className="mapAsset expandAsset bottomButton smaller" onMouseUp={() => toggleGallery()}>Open Gallery</button>
+        <button id="openDex" className="mapAsset expandAsset bottomButton smaller" onMouseUp={() => updateScreen(DEX_SCREEN)}><IoBookOutline size="3.2em"/></button>
+        <button id="openGallery" className="mapAsset expandAsset bottomButton smaller" onMouseUp={() => toggleGallery()}><GrGallery size="2.6em" /></button>
 
       </div>
       {showGallery ? <GalleryOverlay onClose={() => setShowGallery(false)} key={Date.now()} /> : null}

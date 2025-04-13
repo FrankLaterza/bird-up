@@ -49,6 +49,7 @@ body {
   width: var(--cameraButtonSize);
   height: var(--cameraButtonSize);
   border-radius: 100%;
+  border:none;
   background-color: #fff;
   z-index: 9;
   bottom: 10px;
@@ -98,4 +99,9 @@ body {
   left: 0px;
   margin: auto;
   pointer-events: all;
+}
+
+.icon{
+  width:80%;
+  margin:auto;
 }
