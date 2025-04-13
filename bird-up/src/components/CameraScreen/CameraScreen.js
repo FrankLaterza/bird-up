@@ -128,13 +128,14 @@ function CameraScreen() {
     <div id="cameraBox" className="screen">
       <div className="photobooth">
         <div className="controls">
-          <button onClick={takePhoto}>Take Photo</button>
+          {/* <button onClick={takePhoto}>Take Photo</button> */}
         </div>
 
         <canvas className="photo" ref={canvasRef}></canvas>
         <video className="player definitelyHide" ref={videoRef}></video>
         <div className="strip" ref={stripRef}></div>
       </div>
+      <button id="takePhoto" className="" onClick={takePhoto}>Chz</button>
     </div>
   );
 }

@@ -1,19 +1,40 @@
-.CameraScreen {
-    background-color: yellowgreen !important;
-    color:black !important;
+html,
+body {
+    overflow: hidden;
+    height: 100%;
+    width: 100vw;
 }
 
-.cameraBox{
-    height:100vh;
+.CameraScreen {
+    background-color: yellowgreen !important;
+    color: black !important;
+}
+
+.cameraBox {
+    height: 100vh;
     overflow: hidden;
 }
 
-.definitelyHide{
-    display:none !important;
+.definitelyHide {
+    display: none !important;
 }
 
-.photo{
-    height:100vh;
+.photo {
+    height: 100vh;
     overflow: hidden !important;
-    object-fit:contain;
+    object-fit: contain;
+}
+
+#takePhoto {
+    position: absolute;
+    width: var(--cameraButtonSize);
+    height: var(--cameraButtonSize);
+    border-radius: 100%;
+    background-color: #fff;
+    z-index: 9;
+    bottom: 130px;
+    margin: auto;
+    pointer-events: all;
+    left: 0;
+    right: 0;
 }

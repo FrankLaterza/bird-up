@@ -19,25 +19,43 @@ function App() {
   const [currentScreen, setScreen] = useState(MAP_SCREEN);
   const [menuExpanded, expandMenu] = useState(false);
 
+  useEffect(() => {
+    document.getElementById("closeAll").style.display = "none";
+  }, []);
+
   const updateScreen = (screen) => {
     setScreen(screen);
-    let mapIcons = Array.from(document.getElementsByClassName("mapIcon"));
-    console.log(mapIcons);
-    console.log(screen);
-    if (screen != MAP_SCREEN) {
-      mapIcons.map((mapIcon) => mapIcon.style.display = "none");
-      expandMenu(true);
-    }
-    else {
-      mapIcons.map((mapIcon) => mapIcon.style.display = "block");
-    }
 
-  }
+    // Hide or show map assets
+    const mapAssets = Array.from(document.getElementsByClassName("mapAsset"));
+    mapAssets.forEach((mapAsset) => {
+      if (mapAsset && mapAsset.style) {
+        mapAsset.style.display = screen == MAP_SCREEN ? "block" : "none";
+      }
+    });
+
+    // Hide or show expand assets
+    const expandAssets = Array.from(document.getElementsByClassName("expandAsset"));
+    expandAssets.forEach((expandAsset) => {
+      if (expandAsset && expandAsset.style) {
+        expandAsset.style.display = "none";
+      }
+    });
+
+    Array.from(document.getElementsByClassName("antiMapAsset")).forEach((antiMapAsset) => {
+      if (antiMapAsset && antiMapAsset.style) {
+        antiMapAsset.style.display = screen == MAP_SCREEN ? "none" : "block";
+      }
+    });
+
+    // Expand menu if not on the map screen
+    expandMenu(screen !== MAP_SCREEN);
+  };
 
   const toggleMenu = () => {
     expandMenu(!menuExpanded);
-    let expandIcons = Array.from(document.getElementsByClassName("expandIcon"));
-    expandIcons.map((expandIcon) => { expandIcon.style.display = menuExpanded ? "none" : "block" });
+    let expandAssets = Array.from(document.getElementsByClassName("expandAsset"));
+    expandAssets.map((expandAsset) => { expandAsset.style.display = menuExpanded ? "none" : "block" });
   }
   const setMenu = (shown) => {
     expandMenu(shown);
@@ -49,13 +67,14 @@ function App() {
     <div className="App">
       <CurrentScreen />
       <div id="uiOverlay">
-        <h1 id="crosshairs" className="mapIcon">+</h1>
-        <button id="closeCamera" className="bottomButton centeredButton" onClick={() => updateScreen(MAP_SCREEN)}>Close Cam</button>
-        <button id="openCamera" className="mapIcon bottomButton centeredButton" onClick={() => updateScreen(CAMERA_SCREEN)}>Open Cam</button>
-        <button id="expandMenu" className="mapIcon bottomButton right" onMouseDown={() => toggleMenu()}>Ex Dong</button>
+        <h1 id="crosshairs" className="mapAsset">+</h1>
+        {/* <button id="closeCamera" className="bottomButton centeredButton" onClick={() => updateScreen(MAP_SCREEN)}>Close Cam</button> */}
+        <button id="closeAll" className="antiMapAsset topLeftButton" onClick={() => updateScreen(MAP_SCREEN)}>X</button>
+        <button id="openCamera" className="mapAsset bottomButton centeredButton" onClick={() => updateScreen(CAMERA_SCREEN)}>Open Cam</button>
+        <button id="expandMenu" className="mapAsset bottomButton right" onMouseDown={() => toggleMenu()}>Ex Dong</button>
 
-        <button id="openDex" className="mapIcon expandIcon bottomButton" onMouseUp={() => updateScreen(DEX_SCREEN)}>Open Dex</button>
-        <button id="openGallery" className="mapIcon expandIcon bottomButton" onMouseUp={() => updateScreen(GALLERY_SCREEN)}>Open Gallery</button>
+        <button id="openDex" className="mapAsset expandAsset bottomButton smaller" onMouseUp={() => updateScreen(DEX_SCREEN)}>Open Dex</button>
+        <button id="openGallery" className="mapAsset expandAsset bottomButton smaller" onMouseUp={() => updateScreen(GALLERY_SCREEN)}>Open Gallery</button>
 
       </div>
       {
