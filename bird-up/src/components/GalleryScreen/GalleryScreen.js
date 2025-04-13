@@ -1,73 +1,108 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './GalleryScreen.css';
 
-const birdData = [
-  { imgSrc: "https://via.placeholder.com/150", date: "2025-04-10", birdName: "Blue Jay" },
-  { imgSrc: "https://via.placeholder.com/150", date: "2025-04-10", birdName: "Robin" },
-  { imgSrc: "https://via.placeholder.com/150", date: "2025-04-11", birdName: "Cardinal" },
-  { imgSrc: "https://via.placeholder.com/150", date: "2025-04-12", birdName: "Hawk" },
-  { imgSrc: "https://via.placeholder.com/150", date: "2025-04-11", birdName: "Robin" },
-];
+const GalleryScreen = () => {
+  const [birdData, setBirdData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showGallery, setShowGallery] = useState(false);
 
-const groupableFields = ["date", "birdName"];
+  useEffect(() => {
+    const fetchBirdData = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/get-gallery-data');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        // Transform the data into a flat array of bird images
+        const allBirds = [];
+        
+        Object.entries(data.birds).forEach(([species, sightings]) => {
+          sightings.forEach(sighting => {
+            allBirds.push({
+              imageUrl: `http://localhost:5001/${sighting.uri}`
+            });
+          });
+        });
+        
+        setBirdData(allBirds);
+        // Auto-show the gallery once data is loaded
+        setShowGallery(true);
+      } catch (err) {
+        console.error("Error fetching bird data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-const BirdGallery = ({ data = birdData }) => {
-  const [groupBy, setGroupBy] = useState("date");
+    fetchBirdData();
+  }, []);
 
-  const handleGroupChange = (e) => {
-    setGroupBy(e.target.value);
+  // Calculate rows (3 items per row)
+  const getRows = () => {
+    const rows = [];
+    for (let i = 0; i < birdData.length; i += 3) {
+      rows.push(birdData.slice(i, i + 3));
+    }
+    return rows;
+  };
+  
+  // Close the gallery overlay
+  const closeGallery = () => {
+    setShowGallery(false);
   };
 
-  // Group data dynamically
-  const groupedData = data.reduce((acc, item) => {
-    const key = item[groupBy];
-    if (!acc[key]) acc[key] = [];
-    acc[key].push(item);
-    return acc;
-  }, {});
+  if (!showGallery) {
+    return null;
+  }
 
   return (
-    <div className="p-4 space-y-8">
-      <div className="mb-4">
-        <label className="mr-2 font-semibold text-gray-700">Group by:</label>
-        <select
-          value={groupBy}
-          onChange={handleGroupChange}
-          className="border rounded px-2 py-1"
-        >
-          {groupableFields.map((field) => (
-            <option key={field} value={field}>
-              {field}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {Object.entries(groupedData).map(([group, birds]) => (
-        <div key={group}>
-          <h2 className="text-xl font-bold mb-2">{group}</h2>
-          <div className="flex flex-wrap gap-4">
-            {birds.map((bird, index) => (
-              <div
-                key={index}
-                className="w-48 h-32 bg-blue-100 border border-blue-300 rounded-md flex flex-col items-center justify-center shadow-sm"
-              >
-                <img
-                  src={bird.imgSrc}
-                  alt={bird.birdName}
-                  className="w-full h-20 object-cover rounded-t-md"
-                />
-                <span className="mt-1 text-sm font-medium">{bird.birdName}</span>
-              </div>
-            ))}
-          </div>
+    <div className="gallery-overlay">
+      <div className="gallery-modal">
+        <div className="gallery-header">
+          <h2>Bird Gallery</h2>
+          <button 
+            className="close-button" 
+            onClick={closeGallery}
+            aria-label="Close gallery"
+          >
+            ×
+          </button>
         </div>
-      ))}
+        
+        <div className="gallery-content">
+          {loading ? (
+            <div className="loading-indicator">Loading birds...</div>
+          ) : (
+            <div className="gallery-grid">
+              {getRows().map((row, rowIndex) => (
+                <div key={rowIndex} className="gallery-row">
+                  {row.map((bird, birdIndex) => (
+                    <div key={`${rowIndex}-${birdIndex}`} className="gallery-item">
+                      <img 
+                        src={bird.imageUrl} 
+                        alt="Bird"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "https://via.placeholder.com/150x150?text=Image";
+                        }}
+                      />
+                    </div>
+                  ))}
+                  {/* Fill empty spaces to maintain 3 per row */}
+                  {Array(3 - row.length).fill().map((_, i) => (
+                    <div key={`empty-${i}`} className="gallery-item empty"></div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
-    // <div>
-    //   Hi
-    // </div>
   );
 };
 
-export default BirdGallery;
+export default GalleryScreen;

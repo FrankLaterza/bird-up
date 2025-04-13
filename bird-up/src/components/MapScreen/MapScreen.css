@@ -14,3 +14,46 @@
 /* html #map canvas {
     filter: invert(100%) hue-rotate(180deg);
   } */
+
+.map-container {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.map-screen {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Gallery Button Styling */
+.gallery-button {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  background-color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gallery-button:hover {
+  background-color: #f8f8f8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}

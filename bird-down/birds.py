@@ -184,7 +184,8 @@ class BirdSightingManager:
                 bs.species_name,
                 s.image_path,
                 s.rating,
-                s.description
+                s.description,
+                s.timestamp
             FROM sightings s
             JOIN users u ON s.user_id = u.user_id
             JOIN bird_species bs ON s.species_id = bs.species_id
@@ -195,7 +196,7 @@ class BirdSightingManager:
         # Fetch specific columns needed for the JSON structure
         rows = self.db_manager.read_data(
             table_name="sightings s JOIN users u ON s.user_id = u.user_id JOIN bird_species bs ON s.species_id = bs.species_id",
-            columns="bs.species_name, s.image_path, s.rating, s.description",
+            columns="bs.species_name, s.image_path, s.rating, s.description, s.timestamp",
             condition="u.user_id = ?",
             params=(user_id,)
         )
@@ -210,11 +211,12 @@ class BirdSightingManager:
         # Structure the data as requested: {species_name: [list_of_sightings]}
         user_bird_data = {}
         for row in rows:
-            species_name, image_path, rating, description = row
+            species_name, image_path, rating, description, timestamp = row
             sighting_details = {
                 "uri": image_path, # Using image_path as URI
                 "rating": rating,
-                "description": description
+                "description": description,
+                "timestamp": timestamp
             }
             if species_name not in user_bird_data:
                 user_bird_data[species_name] = []
@@ -300,5 +302,3 @@ if __name__ == "__main__":
     tracker.close_connection()
 
     print("\n--- Bird Sighting Tracker Finished ---")
-
-

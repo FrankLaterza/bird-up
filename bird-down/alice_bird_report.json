@@ -11,11 +11,26 @@
                 "uri": "bird_images/a911764e-ffa4-46d4-ab94-ae2331676bb9.jpg",
                 "rating": 5,
                 "description": "Another sighting, closer this time."
+            },
+            {
+                "uri": "bird_images\\02da7807-5fd5-437e-b6b8-cb1f636dd0dd.jpg",
+                "rating": 4,
+                "description": "Vibrant blue, very active."
+            },
+            {
+                "uri": "bird_images\\11442e83-d120-47c2-865f-2f81feeb388b.jpg",
+                "rating": 5,
+                "description": "Another sighting, closer this time."
             }
         ],
         "crow": [
             {
                 "uri": "bird_images/6dc106d4-ce16-483e-af1a-b5a9e2815f2d.jpg",
+                "rating": 3,
+                "description": "Standard crow, watching from a distance."
+            },
+            {
+                "uri": "bird_images\\6343e7cd-cdaa-48d5-934d-a29dcdebe9c4.jpg",
                 "rating": 3,
                 "description": "Standard crow, watching from a distance."
             }
