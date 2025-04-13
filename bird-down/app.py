@@ -48,7 +48,7 @@ def load_bird_descriptions(file_path):
 
 BIRD_DESCRIPTION_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bird_descs.txt')
 bird_descriptions = load_bird_descriptions(BIRD_DESCRIPTION_FILE)
-print(bird_descriptions)
+
 
 def clean_bird_data(bird_data):
     cleaned_data = []
