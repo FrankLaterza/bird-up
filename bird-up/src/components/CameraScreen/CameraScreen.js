@@ -1,16 +1,94 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './CameraScreen.css';
+import { formatSpeciesName } from './utils';
+
+const CaughtCard = ({ birdData, imageUrl, onClose }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+
+  useEffect(() => {
+    // Start the appear animation after component mounts
+    const showTimer = setTimeout(() => {
+      setIsVisible(true);
+    }, 10);
+
+    return () => clearTimeout(showTimer);
+  }, []);
+
+  // Handle closing animation
+  const handleClose = () => {
+    setIsClosing(true);
+    // Wait for animation to complete before calling onClose
+    setTimeout(() => {
+      onClose();
+    }, 400); // Match animation duration from CSS
+  };
+
+  // Format the species name
+  const formattedSpecies = formatSpeciesName(birdData.species);
+
+  return (
+    <div className={`caught-overlay ${isVisible ? 'visible' : ''} ${isClosing ? 'closing' : ''}`}>
+      <div className="caught-card">
+        <div className="caught-header">
+          <h3>Bird Identified!</h3>
+          <button 
+            className="close-button" 
+            onClick={handleClose}
+            aria-label="Return to camera"
+          >
+            &times;
+          </button>
+        </div>
+        
+        <div className="caught-content">
+          <div className="caught-image-container">
+            <img 
+              src={imageUrl} 
+              alt={formattedSpecies}
+              className="caught-image"
+            />
+          </div>
+          
+          <div className="caught-info">
+            <div>
+              <p className="caught-message">You took a picture of:</p>
+              <p className="caught-species">{formattedSpecies}</p>
+            </div>
+            
+            <div className="caught-rating">
+              <span className="info-label">Photo Rating:</span>
+              <div className="rating-bar">
+                <div 
+                  className="rating-fill" 
+                  style={{ width: `${Math.min(100, birdData.quality_score)}%` }}
+                ></div>
+              </div>
+              <span className="rating-value">{birdData.quality_score.toFixed(1)}%</span>
+            </div>
+            
+            <div className="caught-description">
+              <span className="info-label">Description:</span>
+              <p>{birdData.description || "No description available"}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 function CameraScreen() {
-  // Add state for handling video elements
+  // Add state for handling video elements and the caught card
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const stripRef = useRef(null);
   const [ctx, setCtx] = useState(null);
+  const [capturedImage, setCapturedImage] = useState(null);
+  const [birdData, setBirdData] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   function runVideo() {
     const video = videoRef.current;
@@ -61,14 +139,23 @@ function CameraScreen() {
     video.addEventListener('canplay', paintToCanvas);
   }
 
+  // Handle closing the CaughtCard
+  const handleCloseCaughtCard = () => {
+    setBirdData(null);
+    setCapturedImage(null);
+  };
+
   // Move takePhoto and uploadImageToServer out of runVideo to make them accessible to button
   function takePhoto() {
     const canvas = canvasRef.current;
     const strip = stripRef.current;
     
     try {
-      // take the data out of the canvas
+      // Take the data out of the canvas
       const data = canvas.toDataURL('image/jpeg');
+      
+      // Store the captured image URL
+      setCapturedImage(data);
       
       // Display the captured image in the strip
       const link = document.createElement('a');
@@ -85,6 +172,9 @@ function CameraScreen() {
   }
   
   function uploadImageToServer(dataUrl) {
+    // Set uploading state
+    setIsUploading(true);
+    
     // Convert the base64 data URL to a blob
     const fetchBlob = fetch(dataUrl).then(res => res.blob());
     
@@ -101,11 +191,16 @@ function CameraScreen() {
       .then(response => response.json())
       .then(data => {
         console.log('Image uploaded successfully:', data);
-        // Here you can handle success, maybe show a confirmation message
+        setIsUploading(false);
+        
+        // If we have bird data, save it to state to display the CaughtCard
+        if (data.success && data.bird_data) {
+          setBirdData(data.bird_data);
+        }
       })
       .catch(error => {
         console.error('Error uploading image:', error);
-        // Handle the error appropriately
+        setIsUploading(false);
       });
     });
   }
@@ -128,13 +223,27 @@ function CameraScreen() {
     <div id="cameraBox" className="screen">
       <div className="photobooth">
         <div className="controls">
-          <button onClick={takePhoto}>Take Photo</button>
+          <button 
+            onClick={takePhoto} 
+            disabled={isUploading}
+          >
+            {isUploading ? 'Processing...' : 'Take Photo'}
+          </button>
         </div>
 
         <canvas className="photo" ref={canvasRef}></canvas>
         <video className="player definitelyHide" ref={videoRef}></video>
         <div className="strip" ref={stripRef}></div>
       </div>
+      
+      {/* Display the CaughtCard when we have bird data */}
+      {capturedImage && birdData && (
+        <CaughtCard 
+          birdData={birdData} 
+          imageUrl={capturedImage} 
+          onClose={handleCloseCaughtCard} 
+        />
+      )}
     </div>
   );
 }
