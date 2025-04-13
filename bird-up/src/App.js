@@ -5,19 +5,20 @@ import Map from 'ol/Map';
 
 import MapScreen from './components/MapScreen/MapScreen';
 import DexScreen from './components/DexScreen/DexScreen';
-import GalleryScreen from './components/GalleryScreen/GalleryScreen';
 import CameraScreen from './components/CameraScreen/CameraScreen';
+
+import GalleryOverlay from './components/GalleryScreen/GalleryOverlay';
 
 import './App.css';
 
 function App() {
   const MAP_SCREEN = 0;
   const DEX_SCREEN = 1;
-  const GALLERY_SCREEN = 2;
   const CAMERA_SCREEN = 3;
-  const screens = [MapScreen, DexScreen, GalleryScreen, CameraScreen]; // Array of screen components
+  const screens = [MapScreen, DexScreen, null, CameraScreen]; 
   const [currentScreen, setScreen] = useState(MAP_SCREEN);
   const [menuExpanded, expandMenu] = useState(false);
+  const [showGallery, setShowGallery] = useState(false); 
 
   const updateScreen = (screen) => {
     setScreen(screen);
@@ -31,7 +32,10 @@ function App() {
     else {
       mapIcons.map((mapIcon) => mapIcon.style.display = "block");
     }
+  }
 
+  const toggleGallery = () => {
+    setShowGallery(!showGallery);
   }
 
   const toggleMenu = () => {
@@ -43,7 +47,7 @@ function App() {
     expandMenu(shown);
   }
 
-  const CurrentScreen = screens[currentScreen]; // Select the current screen component
+  const CurrentScreen = screens[currentScreen]; 
 
   return (
     <div className="App">
@@ -55,12 +59,10 @@ function App() {
         <button id="expandMenu" className="mapIcon bottomButton right" onMouseDown={() => toggleMenu()}>Ex Dong</button>
 
         <button id="openDex" className="mapIcon expandIcon bottomButton" onMouseUp={() => updateScreen(DEX_SCREEN)}>Open Dex</button>
-        <button id="openGallery" className="mapIcon expandIcon bottomButton" onMouseUp={() => updateScreen(GALLERY_SCREEN)}>Open Gallery</button>
+        <button id="openGallery" className="mapIcon expandIcon bottomButton" onMouseUp={() => toggleGallery()}>Open Gallery</button>
 
       </div>
-      {
-
-      }
+      {showGallery ? <GalleryOverlay onClose={() => setShowGallery(false)} key={Date.now()} /> : null}
     </div>
   );
 }

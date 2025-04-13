@@ -12,7 +12,7 @@ const start = [-76.939, 38.9861];
 const center = transform(start, 'EPSG:4326', 'EPSG:3857');
 
 function MapScreen() {
-  const mapRef = useRef()
+  const mapRef = useRef();
 
   useEffect(() => {
     const osmLayer = new TileLayer({
@@ -32,11 +32,13 @@ function MapScreen() {
   }, [])
 
   return (
-    <div
-      id="map"
-      ref={mapRef}
-      className="map-container"
-    />
+    <div className="map-screen">
+      <div
+        id="map"
+        ref={mapRef}
+        className="map-container"
+      />
+    </div>
   )
 }
 

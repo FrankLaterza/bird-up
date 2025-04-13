@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 import requests
 import os
 import re
@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from birds import BirdSightingManager
 from ml.image_processing import process_image
+import json
 
 load_dotenv()
 
@@ -143,6 +144,22 @@ def upload_image():
         })
     
     return jsonify({'error': 'File type not allowed'}), 400
+
+# GET /api/get-gallery-data
+@app.route('/api/get-gallery-data', methods=['GET'])
+def get_gallery_data():
+    try:
+        # Read the bird_report.json file
+        with open('bird_report.json', 'r') as f:
+            bird_data = json.load(f)
+        return jsonify(bird_data)
+    except Exception as e:
+        return jsonify({'error': 'Error loading gallery data', 'message': str(e)}), 500
+
+# Route to serve bird images
+@app.route('/bird_images/<path:filename>', methods=['GET'])
+def serve_bird_image(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
