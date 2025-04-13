@@ -250,23 +250,36 @@ function DexScreen() {
   return (
     <div id="dexHolder" className="">
       {
-      Object.entries(items).map(([key, item], index) => (
-      <div
-        key={index}
-        className={`polaroid dexItem ${item.seen ? "seen" : "unseen"}`}
-        style={{
-          transform: `rotate(${Math.floor(randoms[index])}deg)`
-        }}
-      >
-        <img
-          src={item.seen ? item.image : "assets/unseen.png"}
-          alt={item.name}
-          className={item.seen ? "" : "placeholder"}
-        />
-        <h3 className="font-bold text-lg">{item.name}</h3>
-        <p className="text-sm text-gray-600">{item.date}</p>
+        Object.entries(items).map(([key, item], index) => (
+          <div
+            key={index}
+            className={`polaroid dexItem ${item.seen ? "seen" : "unseen"}`}
+            style={{
+              transform: `rotate(${Math.floor(randoms[index])}deg)`
+            }}
+          >
+            <img
+              src={item.seen ? item.image : "assets/unseen.png"}
+              alt={item.name}
+              className={item.seen ? "" : "placeholder"}
+            />
+            <h3 className="font-bold text-lg">{item.name}</h3>
+            <p className="text-sm text-gray-600">{item.date}</p>
+          </div>
+        ))}
+
+      <div className="falling-leaves-background">
+        <div className="leaf"></div>
+        <div className="leaf"></div>
+        <div className="leaf"></div>
+        <div className="leaf"></div>
+        <div className="leaf"></div>
+        <div className="leaf"></div>
+        <div className="leaf"></div>
+        <div className="leaf"></div>
+        <div className="leaf"></div>
+        <div className="leaf"></div>
       </div>
-      ))}
     </div>
   );
 }

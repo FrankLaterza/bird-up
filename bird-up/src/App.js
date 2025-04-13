@@ -19,10 +19,10 @@ function App() {
   const MAP_SCREEN = 0;
   const DEX_SCREEN = 1;
   const CAMERA_SCREEN = 2;
-  const screens = [MapScreen, DexScreen, CameraScreen]; 
+  const screens = [MapScreen, DexScreen, CameraScreen];
   const [currentScreen, setScreen] = useState(MAP_SCREEN);
   const [menuExpanded, expandMenu] = useState(false);
-  const [showGallery, setShowGallery] = useState(false); 
+  const [showGallery, setShowGallery] = useState(false);
 
   useEffect(() => {
     document.getElementById("closeAll").style.display = "none";
@@ -41,9 +41,17 @@ function App() {
 
     // Hide or show expand assets
     const expandAssets = Array.from(document.getElementsByClassName("expandAsset"));
-    expandAssets.forEach((expandAsset) => {
+    const expyMenu = document.getElementById("expandMenu");
+    expandAssets.forEach(async (expandAsset) => {
       if (expandAsset && expandAsset.style) {
-        expandAsset.style.display = "none";
+        expyMenu.classList.remove("rotato");
+        expyMenu.classList.add("unrotato");
+        expandAsset.classList.remove("expando");
+        expandAsset.classList.add("retracto");
+        expandAsset.classList.add("definitelyHidden");
+        await new Promise(resolve => setTimeout(resolve, 400));
+        expandAsset.classList.remove("definitelyHidden");
+
       }
     });
 
@@ -61,16 +69,38 @@ function App() {
     setShowGallery(!showGallery);
   }
 
-  const toggleMenu = () => {
+  const toggleMenu = async () => {
     expandMenu(!menuExpanded);
-    let expandAssets = Array.from(document.getElementsByClassName("expandAsset"));
-    expandAssets.map((expandAsset) => { expandAsset.style.display = menuExpanded ? "none" : "block" });
-  }
+    const expyMenu = document.getElementById("expandMenu");
+    const expandAssets = Array.from(document.getElementsByClassName("expandAsset"));
+
+    if (menuExpanded) {
+      expyMenu.classList.remove("rotato");
+      expyMenu.classList.add("unrotato");
+    } else {
+      expyMenu.classList.remove("unrotato");
+      expyMenu.classList.add("rotato");
+    }
+
+    for (const expandAsset of expandAssets) {
+      if (menuExpanded) {
+        expandAsset.classList.remove("expando");
+        expandAsset.classList.add("retracto");
+      } else {
+        expandAsset.classList.remove("retracto");
+        expandAsset.classList.add("expando");
+      }
+
+      // Wait 200ms between each element
+      await new Promise(resolve => setTimeout(resolve, 200));
+    }
+  };
+
   const setMenu = (shown) => {
     expandMenu(shown);
   }
 
-    const CurrentScreen = screens[currentScreen]; 
+  const CurrentScreen = screens[currentScreen];
 
   return (
     <div className="App">
@@ -81,10 +111,10 @@ function App() {
         <button id="closeAll" className="antiMapAsset topLeftButton" onClick={() => updateScreen(MAP_SCREEN)}>X</button>
         <button id="openCamera" className="mapAsset bottomButton centeredButton" onClick={() => updateScreen(CAMERA_SCREEN)}><FaCamera size="3.2em" />
         </button>
-        <button id="expandMenu" className="mapAsset bottomButton right smaller" onMouseDown={() => toggleMenu()}><TiThMenu size="3.2em" /></button>
+        <button id="expandMenu" className="derotato mapAsset bottomButton right smaller" onClick={() => toggleMenu()}><TiThMenu size="3.2em" /></button>
 
-        <button id="openDex" className="mapAsset expandAsset bottomButton smaller" onMouseUp={() => updateScreen(DEX_SCREEN)}><IoBookOutline size="3.2em"/></button>
-        <button id="openGallery" className="mapAsset expandAsset bottomButton smaller" onMouseUp={() => toggleGallery()}><GrGallery size="2.6em" /></button>
+        <button id="openGallery" className="mapAsset expandAsset bottomButton smaller" onClick={() => toggleGallery()}><GrGallery size="2.6em" /></button>
+        <button id="openDex" className="mapAsset expandAsset bottomButton smaller" onClick={() => updateScreen(DEX_SCREEN)}><IoBookOutline size="3.2em" /></button>
 
       </div>
       {showGallery ? <GalleryOverlay onClose={() => setShowGallery(false)} key={Date.now()} /> : null}

@@ -2,6 +2,7 @@
   --cameraButtonSize: 80px;
   --xButtonSize: 50px;
   --smallerButtonSize: 65px;
+  --buttonHoverColor:#b2e5b7;
 }
 
 html,
@@ -18,8 +19,10 @@ body {
   text-align: center;
   position: relative;
   overflow: hidden;
-  height: 100vh;  /* Full viewport height */
-  width: 100vw;   /* Full viewport width */
+  height: 100vh;
+  /* Full viewport height */
+  width: 100vw;
+  /* Full viewport width */
 }
 
 #uiOverlay {
@@ -52,12 +55,13 @@ body {
   width: var(--cameraButtonSize);
   height: var(--cameraButtonSize);
   border-radius: 100%;
-  border:none;
+  border: none;
   background-color: #fff;
   z-index: 9;
   bottom: 10px;
   margin: auto;
   pointer-events: all;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 .centeredButton {
@@ -70,18 +74,111 @@ body {
   right: 20px;
 }
 
-.expandAsset {
-  display: none;
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(90deg);
+  }
 }
+
+@keyframes derotate {
+  0% {
+    transform: rotate(90deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes flyInFromBelow {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+    display: none;
+  }
+
+  99% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    display: block;
+  }
+}
+
+@keyframes flyOutToBelow {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+    display: block;
+  }
+
+  100% {
+    transform: translateY(20px);
+    opacity: 0;
+    display: none;
+  }
+}
+
+.rotato{
+  animation: rotate 0.4s ease-out forwards;
+}
+
+.unrotato{
+  animation: derotate 0.4s ease-out forwards;
+}
+
+.expandAsset {
+  pointer-events: all !important;
+  display: none;
+  /* Default state is hidden */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+  transition: 0.3s ease-in-out;
+}
+
+.expando {
+  display: block;
+  /* Make it visible */
+  animation: flyInFromBelow 0.4s ease-out;
+}
+
+.retracto {
+  display: block;
+  /* Make it visible */
+  animation: flyOutToBelow 0.4s ease-out forwards;
+}
+
 
 #openDex {
   right: 20px;
-  bottom: 100px;
+  bottom: 180px;
 }
 
 #openGallery {
   right: 20px;
-  bottom: 180px;
+  bottom: 100px;
+}
+
+#expandMenu {
+  transition: 0.3s ease-in-out;
+  
+}
+
+button {
+  transition: 0.3s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.05);
+  /* border:2px solid #777; */
+  background-color: var(--buttonHoverColor);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.6 );
+
 }
 
 .smaller {
@@ -104,7 +201,29 @@ body {
   pointer-events: all;
 }
 
-.icon{
-  width:80%;
-  margin:auto;
+.icon {
+  width: 80%;
+  margin: auto;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.definitelyHidden {
+  opacity: 0.01 !important;
 }
