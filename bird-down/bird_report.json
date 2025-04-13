@@ -1,0 +1,45 @@
+{
+    "username": "DEFAULT_USER",
+    "birds": {
+        "084.red_legged_kittiwake": [
+            {
+                "uri": "bird_images\\00b16a8f-14db-4cd7-ac5d-faf4c0092020.jpg",
+                "rating": 34.37,
+                "description": "The red-legged kittiwake is a seabird species in the gull family Laridae. It breeds in the Pribilof Islands, Bogoslof Island, and Buldir Island in the Bering Sea off the coast of Alaska, and the Commander Islands, Russia, and spends the winter at sea.",
+                "timestamp": "2025-04-13 09:48:04"
+            }
+        ],
+        "166.golden_winged_warbler": [
+            {
+                "uri": "bird_images\\00cb51f3-f0e7-4a58-b285-ea5611233816.jpg",
+                "rating": 56.74,
+                "description": "The golden-winged warbler is a New World warbler. It breeds in southeastern and south-central Canada and in the Appalachian Mountains in northeastern to north-central United States. The majority (~70%) of the global population breeds in Wisconsin, Minnesota, and Manitoba. Golden-winged warbler populations are slowly expanding northwards, but are generally declining across its range, most likely as a result of habitat loss and competition/interbreeding with the very closely related blue-winged warbler, Vermivora cyanoptera. Populations are now restricted to two regions: the Great Lakes and the Appalachian Mountains. The Appalachian population has declined 98% since the 1960s and is significantly imperiled. The U.S. Fish and Wildlife Service has been petitioned to list the species under the Endangered Species Act of 1973 and is currently reviewing all information after issuing a positive finding. Upon review, the U.S. Fish and Wildlife Service found that the petition to list the species as endangered or threatened presents \"substantial scientific or commercial information indicating that listing the golden-winged warbler may be warranted.\"",
+                "timestamp": "2025-04-13 09:51:10"
+            }
+        ],
+        "003.sooty_albatross": [
+            {
+                "uri": "bird_images\\563d7788-e053-4f70-ac10-9f0d84f5af52.jpg",
+                "rating": 21.08,
+                "description": "The sooty albatross, also known to sailors as the Quaker, is a species of marine bird belonging to the albatross family Diomedeidae. It is a medium-sized albatross that sports a sooty-brown or sooty-black color. It can be found in the southern Atlantic Ocean, the southern Indian Ocean, and the Southern Ocean. This bird scavenges for squid, fish, and carrion. Like other albatrosses, these birds mate for life and return to the same breeding spots every season. A single pair will mate every other year on a variety of islands in the southern Atlantic Ocean and the southern Indian Ocean islands. This bird is an endangered species and conservation efforts are taking place.",
+                "timestamp": "2025-04-13 11:34:46"
+            }
+        ],
+        "017.cardinal": [
+            {
+                "uri": "bird_images\\6eaf0fc5-953d-4021-9a94-a633915697aa.jpg",
+                "rating": 91.83,
+                "description": "Cardinal or The Cardinal most commonly refers toCardinalidae, a family of North and South American birds\nCardinalis, genus of three species in the family Cardinalidae\nNorthern cardinal, Cardinalis cardinalis, the common cardinal of eastern North America\nPyrrhuloxia or desert cardinal, Cardinalis sinuatus, found in southwest North America\nVermilion cardinal, Cardinalis phoeniceus, found in Colombia and Venezuela\nCardinal, a senior official of the Catholic Church\nMember of the College of Cardinals\nCardinal Health, a health care services company\nCardinal number\nLarge cardinal\nCardinal direction, one of the four primary directions: north, south, east, and west\nCardinal , a 2017 Canadian television series\nArizona Cardinals, an American professional football team\nSt. Louis Cardinals, an American professional baseball team",
+                "timestamp": "2025-04-13 11:35:24"
+            }
+        ],
+        "162.canada_warbler": [
+            {
+                "uri": "bird_images\\58cc8a74-5e20-45e5-830e-d5c73ea1bcd6.jpg",
+                "rating": 85.96,
+                "description": "The Canada warbler is a small boreal songbird of the New World warbler family (Parulidae). It summers in Canada and northeastern United States and winters in northern South America.",
+                "timestamp": "2025-04-13 11:36:12"
+            }
+        ]
+    }
+}
